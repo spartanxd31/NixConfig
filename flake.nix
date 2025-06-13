@@ -1,5 +1,5 @@
 {
-  description = "Your new nix config";
+  description = "Flakes config based on minimal config from https://github.com/Misterio77/nix-starter-configs/tree/main";
 
   inputs = {
     # Nixpkgs

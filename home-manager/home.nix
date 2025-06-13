@@ -75,7 +75,12 @@ home.sessionPath = [
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
-  programs.git.enable = true;
+  programs.git = {
+  enable = true;
+  userName  = "spartanxd31";
+  userEmail = "spartanxd31@vt.edu";
+};
+
   programs.firefox.enable = true;
   programs.tmux.enable = true;
 
