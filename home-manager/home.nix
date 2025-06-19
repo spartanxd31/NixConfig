@@ -58,9 +58,11 @@
        stow
        spotify
        wofi
+      rofi
        tmux
        waybar 
       starship
+    gimp
     steam
       fd
       ruff
@@ -81,9 +83,14 @@ home.sessionPath = [
   userEmail = "spartanxd31@vt.edu";
 };
 
-  programs.firefox.enable = true;
-  programs.tmux.enable = true;
+  programs.fastfetch = {
+    enable = true;
+  };
 
+  programs.firefox.enable = true;
+  programs.tmux = {
+  enable = true;
+  };
   programs.bash.enable = true;
 
 

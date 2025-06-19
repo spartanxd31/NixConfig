@@ -61,7 +61,7 @@
 
   # FIXME: Add the rest of your current configuration
 
-
+powerManagement.enable = true;
 
  #Use the systemd-boot EFI boot loader.
  # boot.loader.systemd-boot.enable = true;
@@ -90,8 +90,14 @@
   # Enable the X11 windowing system.
    services.xserver.enable = true;
 
-services.xserver.displayManager.gdm.enable = true;
-
+services.xserver.displayManager.gdm = {
+        enable = true;
+      debug = false;
+      autoLogin.enable = false;
+      wayland = true;
+      banner = "Welcome to my NixOS machine!";
+    autoSuspend = false;
+};
 
   # Configure keymap in X11
    services.xserver.xkb.layout = "us";
@@ -131,8 +137,14 @@ fonts.packages = with pkgs; [
    environment.systemPackages = with pkgs; [
      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      wget
+    gruvbox-gtk-theme
+    gruvbox-dark-icons-gtk
+gruvbox-material-gtk-theme
      git
      neovim
+    procps
+    util-linux
+    luarocks
      polychromatic
       openrazer-daemon
       gcc 
@@ -150,6 +162,8 @@ fonts.packages = with pkgs; [
       hyprland
       hyprutils
       hypridle
+    networkmanagerapplet
+    gdm-settings
       ntfs3g
     steam
       cliphist
@@ -205,10 +219,10 @@ environment.sessionVariables = {
 
 fileSystems."/mnt/gamehdd" = {
   device = "UUID=325A332C5A32EBEB";   # Replace with actual UUID
-  fsType = "ntfs";            # or "ntfs", depending on what blkid says
-  options = [ "nofail" ];
+  fsType = "ntfs-3g";            # or "ntfs", depending on what blkid says
+  options = [ "nofail" "uid=1000" "gid=100" "umask=0022" "rw" ];
 };
-
+boot.supportedFilesystems = [ "ntfs" ];
 
      boot.loader.grub = {
        enable = true;
