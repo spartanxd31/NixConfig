@@ -99,6 +99,7 @@ services.xserver.displayManager.gdm = {
     autoSuspend = false;
 };
 
+
   # Configure keymap in X11
    services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -120,6 +121,9 @@ services.xserver.displayManager.gdm = {
 services.blueman.enable = true;
 
    programs.hyprland.enable = true;
+programs.hyprland.withUWSM  = true;
+
+
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "steam"
@@ -129,6 +133,7 @@ services.blueman.enable = true;
   ];
 
 programs.gamemode.enable = true;
+
 
 fonts.packages = with pkgs; [
     # other fonts you want...
@@ -140,6 +145,7 @@ fonts.packages = with pkgs; [
     gruvbox-gtk-theme
     gruvbox-dark-icons-gtk
 gruvbox-material-gtk-theme
+    playerctl
      git
      neovim
     procps
@@ -162,20 +168,25 @@ gruvbox-material-gtk-theme
       hyprland
       hyprutils
       hypridle
-    networkmanagerapplet
-    gdm-settings
       ntfs3g
     steam
       cliphist
-      mako
+    #mako
       kitty
       tmux
+    wl-clipboard
     cargo
     nodejs
       vulkan-tools
   vulkan-loader
   vulkan-validation-layers
       ];
+
+
+   programs.appimage.enable = true;
+   programs.appimage.binfmt = true;
+
+
 
 environment.sessionVariables = {
   ENABLE_VK_LAYER_VALVE_steam_overlay = "1";

@@ -9,6 +9,10 @@
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    #Spicetify
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix"; 
+    
+
     #stylix
     stylix = {
      url = "github:danth/stylix";

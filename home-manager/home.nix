@@ -14,6 +14,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
+  inputs.spicetify-nix.homeManagerModules.default
   ];
 
   nixpkgs = {
@@ -55,18 +56,34 @@
        fzf
        ripgrep
        discord
+    godot
        stow
-       spotify
        wofi
+      spicetify-cli
       rofi
        tmux
        waybar 
       starship
-    gimp
-    steam
+      steam
+    lf
       fd
       ruff
+    swaynotificationcenter
   ];
+
+  #services.swaync = {
+  #  ernable = true;
+  #  };
+
+programs.spicetify =
+let
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+in
+{
+  enable = true;
+       theme = spicePkgs.themes.onepunch;
+};
+
 
 home.sessionPath = [
 
