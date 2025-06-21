@@ -68,7 +68,9 @@
     lf
       fd
       ruff
+    freecad
     swaynotificationcenter
+    wlogout
   ];
 
   #services.swaync = {
@@ -105,9 +107,9 @@ home.sessionPath = [
   };
 
   programs.firefox.enable = true;
-  programs.tmux = {
-  enable = true;
-  };
+  #programs.tmux = {
+  #enable = true;
+  #};
   programs.bash.enable = true;
 
 
