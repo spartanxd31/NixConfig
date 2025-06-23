@@ -1,12 +1,6 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
+{ inputs, lib, config, pkgs, ... }: {
   # You can import other home-manager modules here
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
@@ -14,7 +8,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-  inputs.spicetify-nix.homeManagerModules.default
+    inputs.spicetify-nix.homeManagerModules.default
   ];
 
   nixpkgs = {
@@ -45,66 +39,63 @@
     homeDirectory = "/home/dom";
   };
 
-
   home.packages = with pkgs; [
-       tree
-       bash
-       ruff
-       unzip
-       bat
-       hyprcursor
-       fzf
-       ripgrep
-       discord
+    tree
+    bash
+    ruff
+    unzip
+    bat
+    hyprcursor
+    fzf
+    ripgrep
+    discord
     godot
-       stow
-       wofi
-      spicetify-cli
-      rofi
-       tmux
-       waybar 
-      starship
-      steam
+    xorg.xhost
+    stow
+    wofi
+    spicetify-cli
+    rofi
+    tmux
+    waybar
+    starship
+    steam
     lf
-      fd
-      ruff
+    fd
+    ruff
     freecad
+    obs-studio
+    xorg.xinit
     swaynotificationcenter
     wlogout
+    clang-tools
   ];
 
   #services.swaync = {
   #  ernable = true;
   #  };
 
-programs.spicetify =
-let
-  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
-in
-{
-  enable = true;
-       theme = spicePkgs.themes.onepunch;
-};
+  programs.spicetify =
+    let spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+    in {
+      enable = true;
+      theme = spicePkgs.themes.onepunch;
+    };
 
+  home.sessionPath = [
 
-home.sessionPath = [
+    "$HOME/.local/bin"
 
-"$HOME/.local/bin"
-
-]; 
-
+  ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git = {
-  enable = true;
-  userName  = "spartanxd31";
-  userEmail = "spartanxd31@vt.edu";
-};
-
-  programs.fastfetch = {
     enable = true;
+    userName = "spartanxd31";
+    userEmail = "spartanxd31@vt.edu";
   };
+
+  programs.fastfetch = { enable = true; };
 
   programs.firefox.enable = true;
   #programs.tmux = {
@@ -112,10 +103,7 @@ home.sessionPath = [
   #};
   programs.bash.enable = true;
 
-
-  programs.ripgrep ={
-    enable = true;
-  };
+  programs.ripgrep = { enable = true; };
 
   programs.starship = {
     enable = true;
@@ -135,17 +123,13 @@ home.sessionPath = [
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;
-};
+  };
 
-
-programs.neovim = {
-  enable = true;
-  # Optional: add extra packages like treesitter, LSPs, etc.
-  extraPackages = with pkgs; [
-    xclip
-  ];
-};
-
+  programs.neovim = {
+    enable = true;
+    # Optional: add extra packages like treesitter, LSPs, etc.
+    extraPackages = with pkgs; [ xclip ];
+  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
