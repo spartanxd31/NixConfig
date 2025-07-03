@@ -12,6 +12,7 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    ./nvidia.nix
   ];
 
   nixpkgs = {
@@ -183,8 +184,6 @@
     enable = true;
     enableOnBoot = true;
     package = pkgs.docker_25;
-    # Nvidia Docker (deprecated)
-    #enableNvidia = true;
   };
 
   virtualisation.docker.rootless = {
@@ -200,7 +199,7 @@
     enableSSHSupport = true;
   };
 
-  hardware.nvidia-container-toolkit.enable = true;
+  # hardware.nvidia-container-toolkit.enable = true;
   programs.steam.enable = true;
   # List services that you want to enable:
 

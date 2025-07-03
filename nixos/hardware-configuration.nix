@@ -25,23 +25,23 @@
 
   swapDevices = [ ];
 
-  hardware.graphics = { enable = true; };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia = {
-
-    modesetting.enable = true;
-
-    powerManagement.enable = false;
-
-    open = false;
-
-    nvidiaSettings = true;
-
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
+  # hardware.graphics = { enable = true; };
+  #
+  # services.xserver.videoDrivers = [ "nvidia" ];
+  #
+  # hardware.nvidia = {
+  #
+  #   modesetting.enable = true;
+  #
+  #   powerManagement.enable = false;
+  #
+  #   open = true;
+  #
+  #   nvidiaSettings = true;
+  #
+  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # };
+  #
   hardware.openrazer.enable = true;
 
   hardware.bluetooth.enable = true;
