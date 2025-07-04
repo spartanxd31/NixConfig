@@ -38,5 +38,8 @@
 
   powerManagement.powertop.enable = true;
 
+  #for the framework 13
+  services.fwupd.enable = true;
+
 }
 
