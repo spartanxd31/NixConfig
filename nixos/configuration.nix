@@ -62,6 +62,8 @@
   # Use latest kernel.
   #  boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.kernelPackages = pkgs.linuxPackages_lqx;
+
   networking.networkmanager.enable =
     true; # Easiest to use and most distros use this by default.
 
@@ -83,14 +85,21 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  services.xserver.displayManager.gdm = {
+  # services.xserver.displayManager.gdm = {
+  #   enable = true;
+  #   debug = false;
+  #   autoLogin.enable = false;
+  #   wayland = true;
+  #   banner = "Welcome to my NixOS machine!";
+  #   autoSuspend = false;
+  # };
+
+  services.displayManager.sddm = {
     enable = true;
-    debug = false;
-    autoLogin.enable = false;
-    wayland = true;
-    banner = "Welcome to my NixOS machine!";
-    autoSuspend = false;
+    wayland = { enable = true; };
   };
+
+  services.flatpak.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
@@ -160,6 +169,7 @@
     hyprcursor
     hyprland-qtutils
     hyprland
+    icu
     hyprutils
     hypridle
     ntfs3g

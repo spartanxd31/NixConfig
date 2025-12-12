@@ -60,7 +60,9 @@
     starship
     steam
     lf
+    screen
     fd
+    icu
     ruff
     freecad
     obs-studio
