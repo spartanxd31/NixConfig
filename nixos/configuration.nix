@@ -165,7 +165,7 @@
     hyprlock
     hyprland-qt-support
     nwg-look
-    qt6ct
+    qt6Packages.qt6ct
     hyprcursor
     hyprland-qtutils
     hyprland
