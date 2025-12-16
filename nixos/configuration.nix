@@ -84,7 +84,9 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.displayManager.gdm.enable = true;
 
+  services.desktopManager.gnome.enable = true;
   # services.xserver.displayManager.gdm = {
   #   enable = true;
   #   debug = false;
@@ -93,11 +95,10 @@
   #   banner = "Welcome to my NixOS machine!";
   #   autoSuspend = false;
   # };
-
-  services.displayManager.sddm = {
-    enable = true;
-    wayland = { enable = true; };
-  };
+  # services.displayManager.sddm = {
+  #   enable = true;
+  #   wayland = { enable = true; };
+  # };
 
   services.flatpak.enable = true;
 

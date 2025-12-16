@@ -93,8 +93,11 @@
   programs.home-manager.enable = true;
   programs.git = {
     enable = true;
-    userName = "spartanxd31";
-    userEmail = "spartanxd31@vt.edu";
+    settings = {
+      user.name = "Domenic Marcelli";
+      user.email = "spartanxd31@vt.edu";
+
+    };
   };
 
   programs.fastfetch = { enable = true; };
@@ -104,6 +107,11 @@
   #enable = true;
   #};
   programs.bash.enable = true;
+
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode.fhs;
+  };
 
   programs.ripgrep = { enable = true; };
 
