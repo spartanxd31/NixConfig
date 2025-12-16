@@ -69,6 +69,7 @@
     xorg.xinit
     swaynotificationcenter
     wlogout
+    via
     clang-tools
   ];
 
