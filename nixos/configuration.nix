@@ -106,8 +106,28 @@
   services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
+  # Enable systemd-resolved with mDNS/LLMNR so .local hosts are resolved.
+  services.resolved = {
+    enable = true;
+    llmnr = "true";
+    extraConfig = ''
+      MulticastDNS=yes
+    '';
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    nssmdns6 = false;
+    openFirewall = true; # Allow mDNS (UDP 5353) through the firewall
+  };
+
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    browsing = true;
+    drivers = with pkgs; [ hplipWithPlugin cups-filters cups-browsed ];
+  };
 
   # Enable sound.
   #   services.pulseaudio.enable = true;
@@ -218,7 +238,7 @@
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedUDPPorts = [ 5353 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
@@ -237,14 +257,11 @@
   };
   #     boot.loader.efi.canTouchEfiVariables = true;
 
-  # TODO: Set your hostname
   networking.hostName = "nixos";
 
-  # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
-    # FIXME: Replace with your username
     dom = {
-      # TODO: You can set an initial password for your user.
+      # You can set an initial password for your user.
       # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
       # Be sure to change it (using passwd) after rebooting!
       initialPassword = "correcthorsebatterystaple";
@@ -253,7 +270,7 @@
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [ "wheel" " docker" "openrazer" ];
+      extraGroups = [ "wheel" " docker" "openrazer" "lp" "lpadmin" ];
     };
   };
 
@@ -271,5 +288,5 @@
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 }
