@@ -12,7 +12,7 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_lqx;
   fileSystems."/" = {
     device = "/dev/disk/by-label/NIXROOT";
     fsType = "ext4";

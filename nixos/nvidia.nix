@@ -20,6 +20,5 @@
   };
 
   hardware.nvidia-container-toolkit.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_lqx;
 
 }
