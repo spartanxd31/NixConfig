@@ -11,8 +11,8 @@
     # ./users.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
-    ./hardware-configuration.nix
-    ./nvidia.nix
+    ./desktop-hardware-configuration.nix
+    # ./laptop-hardware-configuration.nix
   ];
 
   nixpkgs = {
@@ -59,11 +59,6 @@
   # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Use latest kernel.
-  #  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  boot.kernelPackages = pkgs.linuxPackages_lqx;
-
   networking.networkmanager.enable =
     true; # Easiest to use and most distros use this by default.
 
@@ -84,7 +79,10 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.displayManager.gdm.enable = true;
+  services.displayManager.gdm = {
+    enable = true;
+    wayland = true;
+  };
 
   services.desktopManager.gnome.enable = true;
   # services.xserver.displayManager.gdm = {
