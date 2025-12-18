@@ -11,9 +11,8 @@
     # ./users.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
- #   ./hardware-configuration.nix
-#    ./nvidia.nix
-	./laptop.nix
+    ./desktop-hardware-configuration.nix
+    # ./laptop-hardware-configuration.nix
   ];
 
   nixpkgs = {
@@ -59,11 +58,6 @@
   #Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # Use latest kernel.
-  #  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  boot.kernelPackages = pkgs.linuxPackages_lqx;
 
   networking.networkmanager.enable =
     true; # Easiest to use and most distros use this by default.
