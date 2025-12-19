@@ -20,6 +20,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    #zen bzen-browser
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     #dotfiles
     dotfiles.url = "github:spartanxd31/dotfiles";
     dotfiles.flake = false;

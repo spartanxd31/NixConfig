@@ -160,6 +160,7 @@
     (builtins.attrValues pkgs.nerd-fonts);
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     gruvbox-gtk-theme
@@ -196,6 +197,7 @@
     cliphist
     #mako
     # kitty
+    gnomeExtensions.caffeine
     tmux
     wl-clipboard
     cargo
