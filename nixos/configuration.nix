@@ -195,7 +195,7 @@
     steam
     cliphist
     #mako
-    kitty
+    # kitty
     tmux
     wl-clipboard
     cargo
