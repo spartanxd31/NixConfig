@@ -1,23 +1,24 @@
 { pkgs, ... }: {
   stylix = {
     enable = true;
-    
+
     # Set base16 scheme to gruvbox-material-dark-hard
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
-    
+    base16Scheme =
+      "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
+
     # Set image for wallpaper and color extraction (optional)
-    # image = ./path/to/wallpaper.png;
-    
+    image = ./Mandalorian.jpg;
+
     # Polarity (dark or light)
     polarity = "dark";
-    
+
     # Cursor configuration
     cursor = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Classic";
       size = 24;
     };
-    
+
     # Font configuration
     fonts = {
       monospace = {
@@ -39,7 +40,7 @@
         popups = 10;
       };
     };
-    
+
     # Opacity settings
     opacity = {
       applications = 1.0;
