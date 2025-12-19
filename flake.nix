@@ -20,9 +20,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    #dotfiles
+    dotfiles.url = "github:spartanxd31/dotfiles";
+    dotfiles.flake = false;
+
   };
 
-  outputs = { self, nixpkgs, home-manager, hardware, stylix, ... }@inputs:
+  outputs =
+    { self, nixpkgs, home-manager, hardware, stylix, dotfiles, ... }@inputs:
     let inherit (self) outputs;
     in {
       # NixOS configuration entrypoint

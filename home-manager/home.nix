@@ -1,6 +1,8 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{ inputs, lib, config, pkgs, ... }: {
+{ inputs, lib, config, pkgs, ... }:
+let dotfiles = inputs.dotfiles;
+in {
   # You can import other home-manager modules here
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
@@ -10,6 +12,12 @@
     # ./nvim.nix
     inputs.spicetify-nix.homeManagerModules.default
   ];
+
+  # let 
+  #     dotfiles = inputs.dotfiles;
+  #   in {
+  #     home.file.".config/ki"
+  # }
 
   nixpkgs = {
     # You can add overlays here
@@ -49,6 +57,7 @@
     fzf
     ripgrep
     discord
+    kitty
     godot
     xorg.xhost
     stow
@@ -76,6 +85,17 @@
   #services.swaync = {
   #  ernable = true;
   #  };
+
+
+ home.file.".config/kitty".source = "${dotfiles}/kitty/.config/kitty/";
+
+
+  programs.kitty = {
+      enable = true;
+    };
+
+
+
 
   programs.spicetify =
     let spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
@@ -105,9 +125,15 @@
   programs.fastfetch = { enable = true; };
 
   programs.firefox.enable = true;
-  #programs.tmux = {
-  #enable = true;
-  #};
+
+  #TODO: Need to make tpm a submodule to make this work
+  home.file.".tmux".source = "${dotfiles}/tmux/.tmux/";
+
+  # programs.tmux = {
+  #   enable = true;
+  #   plugins = with pkgs.tmuxPlugins; [ tpm tmux-sensible tmux-resurrect ];
+  # };
+
   programs.bash.enable = true;
 
   programs.vscode = {
@@ -132,10 +158,15 @@
     };
   };
 
+  home.file.".config/starship.toml".source =
+    "${dotfiles}/starship/.config/starship.toml";
+
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;
   };
+
+  # home.file.".config/nvim".source = "${dotfiles}/nvim/.config/nvim";
 
   programs.neovim = {
     enable = true;
@@ -147,5 +178,5 @@
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 }

@@ -68,6 +68,22 @@
         "type": "github"
       }
     },
+    "dotfiles": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1766103515,
+        "narHash": "sha256-bbsgiUF/DpKVOov6Dj3VdWfX0zkCl+XydjlRm2sCHl4=",
+        "owner": "spartanxd31",
+        "repo": "dotfiles",
+        "rev": "1ca9d4872947aad510ce53d296105db1dbe60e55",
+        "type": "github"
+      },
+      "original": {
+        "owner": "spartanxd31",
+        "repo": "dotfiles",
+        "type": "github"
+      }
+    },
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
@@ -235,6 +251,7 @@
     },
     "root": {
       "inputs": {
+        "dotfiles": "dotfiles",
         "hardware": "hardware",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
