@@ -58,10 +58,10 @@ in {
     ripgrep
     discord
     kitty
-    godot
     xorg.xhost
     stow
     wofi
+    heroic
     spicetify-cli
     rofi
     tmux
@@ -86,16 +86,9 @@ in {
   #  ernable = true;
   #  };
 
+  home.file.".config/kitty".source = "${dotfiles}/kitty/.config/kitty/";
 
- home.file.".config/kitty".source = "${dotfiles}/kitty/.config/kitty/";
-
-
-  programs.kitty = {
-      enable = true;
-    };
-
-
-
+  programs.kitty = { enable = true; };
 
   programs.spicetify =
     let spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
