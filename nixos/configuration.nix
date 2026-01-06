@@ -170,7 +170,7 @@
     playerctl
     git
     nixfmt-classic
-    neovim
+    # neovim
     procps
     util-linux
     luarocks

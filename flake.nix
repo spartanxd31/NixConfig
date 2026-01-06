@@ -30,10 +30,15 @@
     dotfiles.url = "github:spartanxd31/dotfiles";
     dotfiles.flake = false;
 
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs =
-    { self, nixpkgs, home-manager, hardware, stylix, dotfiles, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, hardware, stylix, dotfiles, nixvim
+    , ... }@inputs:
     let inherit (self) outputs;
     in {
       # NixOS configuration entrypoint
@@ -56,7 +61,8 @@
             nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs outputs; };
           # > Our main home-manager configuration file <
-          modules = [ ./home-manager/home.nix ];
+          modules =
+            [ nixvim.homeModules.nixvim ./home-manager/home.nix ];
         };
       };
     };

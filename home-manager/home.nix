@@ -82,20 +82,148 @@ in {
     clang-tools
   ];
 
-  #services.swaync = {
-  #  ernable = true;
-  #  };
-
   home.file.".config/kitty".source = "${dotfiles}/kitty/.config/kitty/";
 
+  programs.nixvim = {
+    enable = true;
+
+    opts = {
+      number = true;
+      relativenumber = true;
+
+      shiftwidth = 2;
+      tabstop = 2;
+      expandtab = true;
+      smartindent = true;
+
+      ignorecase = true;
+      smartcase = true;
+      incsearch = true;
+
+      termguicolors = true;
+      cursorline = true;
+      scrolloff = 8;
+      signcolumn = "yes";
+
+      updatetime = 250;
+      undofile = true;
+    };
+
+    colorschemes.gruvbox.enable = true;
+    plugins = {
+      lsp = {
+        enable = true;
+        servers = {
+          basedpyright.enable = true;
+          ruff.enable = true;
+          nixd.enable = true;
+          clangd = {
+            enable = true;
+            cmd = [
+              "clangd"
+              "--background-index"
+              "--clang-tidy"
+              "--header-insertion=never"
+            ];
+          };
+        };
+
+        #        servers.nixd.enable = true;
+      };
+      lightline.enable = true;
+      treesitter.enable = true;
+      nvim-autopairs.enable = true;
+      comment.enable = true;
+      which-key.enable = true;
+      cmp = {
+        enable = true;
+        settings.sources =
+          [ { name = "nvim-lsp"; } { name = "path"; } { name = "buffer"; } ];
+      };
+      conform-nvim = {
+        enable = true;
+        settings.format_on_save = {
+          lsp_fallback = true;
+          timeout_ms = 500;
+        };
+        settings.formatters_by_ft = { nix = [ "nixfmt" ]; };
+      };
+      dap.enable = true;
+      dap-lldb = {
+        enable = true;
+        settings.codelldb_path =
+          "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb";
+      };
+      dap-ui = { enable = true; };
+
+      dap-virtual-text.enable = true;
+
+      rustaceanvim = {
+        enable = true;
+        settings.dap.autoloadConfigurations = true;
+      };
+
+    };
+
+    extraPackages = with pkgs; [
+      lldb
+      vscode-extensions.vadimcn.vscode-lldb
+      clang-tools
+      basedpyright
+      rust-analyzer
+    ];
+
+    keymaps = [
+      {
+        mode = "n";
+        key = "<F5>";
+        action = "<cmd>lua require('dap').continue()<CR>";
+        options.desc = "Debug: Start/Continue";
+      }
+      {
+        mode = "n";
+        key = "<F10>";
+        action = "<cmd>lua require('dap').step_over()<CR>";
+        options.desc = "Debug: Step Over";
+      }
+      {
+        mode = "n";
+        key = "<F11>";
+        action = "<cmd>lua require('dap').step_into()<CR>";
+        options.desc = "Debug: Step Into";
+      }
+      {
+        mode = "n";
+        key = "<leader>b";
+        action = "<cmd>lua require('dap').toggle_breakpoint()<CR>";
+        options.desc = "Debug: Toggle Breakpoint";
+      }
+      {
+        mode = "n";
+        key = "<leader>du";
+        action = "<cmd>lua require('dapui').toggle()<CR>";
+        options.desc = "Debug: Toggle UI";
+      }
+    ];
+
+    extraConfigLua = ''
+      local dap, dapui = require("dap"), require("dapui")
+      dap.listeners.before.attach.dapui_config = function() dapui.open() end
+      dap.listeners.before.launch.dapui_config = function() dapui.open() end
+      dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
+      dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
+    '';
+
+  };
   programs.kitty = { enable = true; };
 
-  programs.spicetify =
-    let spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
-    in {
-      enable = true;
-      theme = spicePkgs.themes.onepunch;
-    };
+  programs.spicetify = let
+    spicePkgs =
+      inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  in {
+    enable = true;
+    theme = spicePkgs.themes.onepunch;
+  };
 
   home.sessionPath = [
 
@@ -161,11 +289,11 @@ in {
 
   # home.file.".config/nvim".source = "${dotfiles}/nvim/.config/nvim";
 
-  programs.neovim = {
-    enable = true;
-    # Optional: add extra packages like treesitter, LSPs, etc.
-    extraPackages = with pkgs; [ xclip ];
-  };
+  #  programs.neovim = {
+  #    enable = true;
+  # Optional: add extra packages like treesitter, LSPs, etc.
+  #    extraPackages = with pkgs; [ xclip ];
+  #  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
