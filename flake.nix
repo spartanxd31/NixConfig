@@ -48,7 +48,12 @@
         nixos = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           # > Our main nixos configuration file <
-          modules = [ stylix.nixosModules.stylix ./nixos/configuration.nix ];
+          modules = [
+            stylix.nixosModules.stylix
+            ./nixos/configuration.nix
+            { nix.settings = { download-buffer-size = 524288000; }; }
+          ];
+
         };
       };
 
@@ -61,8 +66,11 @@
             nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs outputs; };
           # > Our main home-manager configuration file <
-          modules =
-            [ nixvim.homeModules.nixvim ./home-manager/home.nix ];
+          modules = [
+            nixvim.homeModules.nixvim
+            ./home-manager/home.nix
+
+          ];
         };
       };
     };

@@ -22,7 +22,7 @@ in {
   nixpkgs = {
     # You can add overlays here
     overlays = [
-      # If you want to use overlays exported from other flakes:
+      # If you want to use overlays exported from other flakes:lsp
       # neovim-nightly-overlay.overlays.default
 
       # Or define it inline, for example:
@@ -87,6 +87,9 @@ in {
   programs.nixvim = {
     enable = true;
 
+    globals.mapleader = " ";
+    globals.maplocalleader = " ";
+
     opts = {
       number = true;
       relativenumber = true;
@@ -111,6 +114,22 @@ in {
 
     colorschemes.gruvbox.enable = true;
     plugins = {
+      mini = {
+        enable = true;
+        modules = { icons = { }; };
+        mockDevIcons = true;
+      };
+      telescope = {
+        enable = true;
+        enabledExtensions = [ "notify" ];
+        extensions = {
+          ui-select.enable = true;
+          #         notify.enable = true;
+        };
+      };
+      fidget.enable = true;
+      notify.enable = true;
+      oil.enable = true;
       lsp = {
         enable = true;
         servers = {
@@ -135,11 +154,23 @@ in {
       nvim-autopairs.enable = true;
       comment.enable = true;
       which-key.enable = true;
+      cmp-nvim-lsp.enable = true; # Add this!
+      cmp-path.enable = true; # Recommended for file path completion
+      cmp-buffer.enable = true; # Recommended for words in current file
       cmp = {
         enable = true;
+        settings.snippet.expand =
+          "function(args) require('luasnip').lsp_expand(args.body) end";
         settings.sources =
           [ { name = "nvim-lsp"; } { name = "path"; } { name = "buffer"; } ];
+        settings.mapping = {
+          "<Tab>" = "cmp.mapping.select_next_item()";
+          "<S-Tab>" = "cmp.mapping.select_prev_item()";
+          "<CR>" = "cmp.mapping.confirm({ select = true })";
+          "<C-Space>" = "cmp.mapping.complete()"; # Optional: Manual trigger
+        };
       };
+      cmp-treesitter = { enable = true; };
       conform-nvim = {
         enable = true;
         settings.format_on_save = {
@@ -162,6 +193,14 @@ in {
         enable = true;
         settings.dap.autoloadConfigurations = true;
       };
+
+      gitsigns.enable = true;
+
+      luasnip.enable = true;
+
+      treesitter-context.enable = true;
+
+      indent-blankline.enable = true;
 
     };
 
@@ -204,14 +243,48 @@ in {
         action = "<cmd>lua require('dapui').toggle()<CR>";
         options.desc = "Debug: Toggle UI";
       }
+      {
+        mode = "n";
+        key = "<leader>ff"; # Example for Telescope
+        action = "<cmd>Telescope find_files<CR>";
+        options.desc = "Find Files";
+      }
+      {
+        mode = "n";
+        key = "<leader>fg";
+        action = "<cmd>Telescope live_grep<CR>";
+        options.desc = "Live Grep";
+      }
+      {
+        mode = "n";
+        key = "<leader>ca";
+        action = "<cmd>lua vim.lsp.buf.code_action()<CR>";
+        options.desc = "LSP: Code Actions";
+      }
     ];
 
     extraConfigLua = ''
-      local dap, dapui = require("dap"), require("dapui")
-      dap.listeners.before.attach.dapui_config = function() dapui.open() end
-      dap.listeners.before.launch.dapui_config = function() dapui.open() end
-      dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
-      dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
+            local dap, dapui = require("dap"), require("dapui")
+            dap.listeners.before.attach.dapui_config = function() dapui.open() end
+            dap.listeners.before.launch.dapui_config = function() dapui.open() end
+            dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
+            dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
+
+      -- Show line diagnostics automatically in hover window
+            vim.api.nvim_create_autocmd("CursorHold", {
+              callback = function()
+                vim.diagnostic.open_float(nil, {
+                  focusable = false,
+                  close_events = { "CursorMoved", "CursorMovedI", "BufLeave" },
+                  border = "rounded",
+                  source = "always",
+                  prefix = " ",
+                  scope = "cursor",
+                })
+              end,
+            })
+
+
     '';
 
   };
@@ -288,12 +361,6 @@ in {
   };
 
   # home.file.".config/nvim".source = "${dotfiles}/nvim/.config/nvim";
-
-  #  programs.neovim = {
-  #    enable = true;
-  # Optional: add extra packages like treesitter, LSPs, etc.
-  #    extraPackages = with pkgs; [ xclip ];
-  #  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

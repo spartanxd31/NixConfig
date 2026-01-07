@@ -30,12 +30,15 @@
 
   hardware.openrazer.enable = true;
 
-#  hardware.bluetooth.enable = true;
+  # boot.blacklistedKernelModules = [ "ftdi_sio" "usbserial" ];
+  # boot.kernelParams = [ "usbcore.autosuspend=-1" ];
 
-#  hardware.bluetooth.powerOnBoot = true;
+  hardware.bluetooth.enable = false;
 
+  hardware.bluetooth.powerOnBoot = false;
 
-systemd.services.systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
+  systemd.services.systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS =
+    "false";
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

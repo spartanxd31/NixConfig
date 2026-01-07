@@ -56,6 +56,8 @@
 
   powerManagement.enable = true;
 
+  systemd.services.ModemManager.enable = false;
+
   #Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -196,13 +198,12 @@
     ntfs3g
     steam
     cliphist
-    #mako
-    # kitty
     gnomeExtensions.caffeine
     tmux
     wl-clipboard
     cargo
     nodejs
+    distrobox
     vulkan-tools
     vulkan-loader
     vulkan-validation-layers
@@ -221,6 +222,12 @@
   virtualisation.docker.rootless = {
     enable = true;
     setSocketVariable = true;
+  };
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = false;
+    defaultNetwork.settings.dns_enabled = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -271,7 +278,8 @@
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [ "wheel" " docker" "openrazer" "lp" "lpadmin" ];
+      extraGroups =
+        [ "wheel" "plugdev" "docker" "openrazer" "podman" "lp" "lpadmin" ];
     };
   };
 
