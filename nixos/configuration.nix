@@ -62,8 +62,10 @@
   # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.networkmanager.enable =
-    true; # Easiest to use and most distros use this by default.
+  networking.networkmanager = {
+    enable = true;
+    plugins = with pkgs; [ networkmanager-openconnect ];
+  };
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -204,9 +206,11 @@
     cargo
     nodejs
     distrobox
+    usbutils
     vulkan-tools
     vulkan-loader
     vulkan-validation-layers
+    openconnect
   ];
 
   programs.appimage.enable = true;
@@ -295,6 +299,19 @@
       PasswordAuthentication = false;
     };
   };
+
+  services.udev.extraRules = ''
+    # 1. Ignore the device in ModemManager (prevents probing crashes)
+    ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", ENV{ID_MM_DEVICE_IGNORE}="1"
+
+    # 2. Set permissions for JTAG
+    SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="0403", ATTR{idProduct}=="6010", MODE:="666"
+
+    # 3. Unbind the JTAG interface (Interface 0) from the serial driver ftdi_sio
+    # We use DRIVER=="ftdi_sio" to target the specific driver binding
+    ACTION=="add", SUBSYSTEM=="usb", DRIVER=="ftdi_sio", ATTR{idVendor}=="0403", ATTR{idProduct}=="6010", \
+      RUN+="${pkgs.bash}/bin/bash -c 'echo -n %k > /sys/bus/usb/drivers/ftdi_sio/unbind || true'"
+  '';
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";
