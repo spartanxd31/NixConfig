@@ -20,11 +20,17 @@
     enableSSHSupport = true;
   };
 
-  fonts.packages = with pkgs;
-    [
-      # other fonts you want...
-    ] ++ builtins.filter lib.attrsets.isDerivation
-    (builtins.attrValues pkgs.nerd-fonts);
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.meslo-lg
+    # any other non-nerd fonts
+    noto-fonts
+    noto-fonts-color-emoji
+    # other fonts you want...
+  ];
+  # ++ builtins.filter lib.attrsets.isDerivation
+  # (builtins.attrValues pkgs.nerd-fonts);
 
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
