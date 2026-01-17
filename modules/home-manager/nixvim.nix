@@ -1,4 +1,5 @@
 { inputs, config, pkgs, ... }: {
+
   programs.nixvim = {
     enable = true;
 
@@ -29,6 +30,11 @@
 
     colorschemes.gruvbox.enable = true;
     plugins = {
+      direnv = { enable = true; };
+      trouble.enable = true;
+      treesitter-textobjects.enable = true;
+      todo-comments.enable = true;
+      symbol-usage.enable = true;
       mini = {
         enable = true;
         modules = { icons = { }; };
@@ -42,11 +48,13 @@
           #         notify.enable = true;
         };
       };
+      devdocs = { enable = true; };
       fidget.enable = true;
       notify.enable = true;
       oil.enable = true;
       lsp = {
         enable = true;
+        inlayHints = true;
         servers = {
           basedpyright.enable = true;
           ruff.enable = true;
@@ -130,6 +138,32 @@
     keymaps = [
       {
         mode = "n";
+        key = "<leader>K";
+        action = "<cmd>DevdocsOpenCurrentFloat<cr>";
+        options.desc = "Devdocs: Open for word under cursor";
+      }
+      {
+        mode = "n";
+        key = "<leader>sd";
+        action = "<cmd>DevdocsOpen<cr>";
+        options.desc = "Devdocs: Search documentation";
+      }
+      # Trouble
+      {
+        mode = "n";
+        key = "<leader>xx";
+        action = "<cmd>Trouble diagnostics toggle<cr>";
+        options.desc = "Diagnostics (Trouble)";
+      }
+      # Todo Comments
+      {
+        mode = "n";
+        key = "<leader>st";
+        action = "<cmd>TodoTelescope<cr>";
+        options.desc = "Search TODOs";
+      }
+      {
+        mode = "n";
         key = "<F5>";
         action = "<cmd>lua require('dap').continue()<CR>";
         options.desc = "Debug: Start/Continue";
@@ -175,6 +209,60 @@
         key = "<leader>ca";
         action = "<cmd>lua vim.lsp.buf.code_action()<CR>";
         options.desc = "LSP: Code Actions";
+      }
+      {
+        mode = "n";
+        key = "gd";
+        action = "<cmd>lua vim.lsp.buf.definition()<CR>";
+        options.desc = "LSP: Go to Definition";
+      }
+      {
+        mode = "n";
+        key = "gr";
+        action = "<cmd>Telescope lsp_references<CR>";
+        options.desc = "LSP: Go to References";
+      }
+      {
+        mode = "n";
+        key = "K";
+        action = "<cmd>lua vim.lsp.buf.hover()<CR>";
+        options.desc = "LSP: Hover Documentation";
+      }
+      {
+        mode = "n";
+        key = "<leader>rn";
+        action = "<cmd>lua vim.lsp.buf.rename()<CR>";
+        options.desc = "LSP: Rename Symbol";
+      }
+      # Move lines up and down in Visual Mode
+      {
+        mode = "v";
+        key = "J";
+        action = ":m '>+1<CR>gv=gv";
+        options.desc = "Move selection down";
+      }
+      {
+        mode = "v";
+        key = "K";
+        action = ":m '<-2<CR>gv=gv";
+        options.desc = "Move selection up";
+      }
+      # Keep cursor in center when jumping
+      {
+        mode = "n";
+        key = "<C-d>";
+        action = "<C-d>zz";
+      }
+      {
+        mode = "n";
+        key = "<C-u>";
+        action = "<C-u>zz";
+      }
+      {
+        mode = "n";
+        key = "-"; # Traditional mapping for Oil
+        action = "<cmd>Oil<CR>";
+        options.desc = "Open parent directory in Oil";
       }
     ];
 

@@ -46,6 +46,11 @@ in {
 
   programs.firefox.enable = true;
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   programs.spicetify = let
     spicePkgs =
       inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};

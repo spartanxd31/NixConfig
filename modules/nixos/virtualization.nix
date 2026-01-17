@@ -15,4 +15,9 @@
     dockerCompat = false;
     defaultNetwork.settings.dns_enabled = true;
   };
+
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.vhostUserPackages = [ pkgs.virtiofsd ];
+  };
 }

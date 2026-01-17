@@ -83,4 +83,7 @@
   ];
 
   environment.sessionVariables = { ENABLE_VK_LAYER_VALVE_steam_overlay = "1"; };
+
+  programs.virt-manager.enable = true;
+
 }
