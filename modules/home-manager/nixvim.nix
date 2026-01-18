@@ -34,7 +34,6 @@
       trouble.enable = true;
       treesitter-textobjects.enable = true;
       todo-comments.enable = true;
-      symbol-usage.enable = true;
       mini = {
         enable = true;
         modules = { icons = { }; };
@@ -77,6 +76,7 @@
       nvim-autopairs.enable = true;
       comment.enable = true;
       which-key.enable = true;
+      cmp_luasnip.enable = true;
       cmp-nvim-lsp.enable = true; # Add this!
       cmp-path.enable = true; # Recommended for file path completion
       cmp-buffer.enable = true; # Recommended for words in current file
@@ -84,8 +84,12 @@
         enable = true;
         settings.snippet.expand =
           "function(args) require('luasnip').lsp_expand(args.body) end";
-        settings.sources =
-          [ { name = "nvim-lsp"; } { name = "path"; } { name = "buffer"; } ];
+        settings.sources = [
+          { name = "nvim_lsp"; }
+          { name = "luasnip"; }
+          { name = "path"; }
+          { name = "buffer"; }
+        ];
         settings.mapping = {
           "<Tab>" = "cmp.mapping.select_next_item()";
           "<S-Tab>" = "cmp.mapping.select_prev_item()";
@@ -286,7 +290,6 @@
                 })
               end,
             })
-
 
     '';
 

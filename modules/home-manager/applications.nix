@@ -13,7 +13,7 @@ in {
 
     # Terminal emulator
     kitty
-
+    btop
     # Wayland/Hyprland utilities
     wofi
     rofi
