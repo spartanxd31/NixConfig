@@ -16,8 +16,14 @@
     defaultNetwork.settings.dns_enabled = true;
   };
 
+  services.spice-vdagentd.enable = true;
+
   virtualisation.libvirtd = {
     enable = true;
-    qemu.vhostUserPackages = [ pkgs.virtiofsd ];
+    qemu = {
+      vhostUserPackages = [ pkgs.virtiofsd ];
+      swtpm.enable = true;
+    };
+
   };
 }
