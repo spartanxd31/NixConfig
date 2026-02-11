@@ -68,6 +68,7 @@
           # > Our main home-manager configuration file <
           modules = [
             nixvim.homeModules.nixvim
+            stylix.homeModules.stylix
             ./home-manager/home.nix
 
           ];

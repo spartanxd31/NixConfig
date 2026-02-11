@@ -7,17 +7,17 @@
       "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
 
     # Set image for wallpaper and color extraction (optional)
-    image = ./Mandalorian.jpg;
+    #image = ./Mandalorian.jpg;
 
     # Polarity (dark or light)
     polarity = "dark";
 
-    # Cursor configuration
-    cursor = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
-      size = 24;
-    };
+    # Cursor configuration - disabled, managed by home-manager
+    # cursor = {
+    #   package = pkgs.bibata-cursors;
+    #   name = "Bibata-Modern-Ice";
+    #   size = 24;
+    # };
 
     # Font configuration
     fonts = {

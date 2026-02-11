@@ -13,6 +13,7 @@ in {
     ../modules/home-manager/shell.nix
     ../modules/home-manager/development.nix
     ../modules/home-manager/applications.nix
+    ../modules/home-manager/stylix.nix
 
     inputs.spicetify-nix.homeManagerModules.default
   ];

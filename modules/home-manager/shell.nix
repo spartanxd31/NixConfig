@@ -4,18 +4,10 @@ in {
   programs.bash.enable = true;
 
   programs.starship = {
+
     enable = true;
     # Configuration written to ~/.config/starship.toml
-    settings = {
-      # add_newline = false;
-
-      # character = {
-      #   success_symbol = "[➜](bold green)";
-      #   error_symbol = "[➜](bold red)";
-      # };
-
-      # package.disabled = true;
-    };
+    # Using custom config from dotfiles instead of settings
   };
 
   home.file.".config/starship.toml".source =
@@ -36,7 +28,5 @@ in {
   #   plugins = with pkgs.tmuxPlugins; [ tpm tmux-sensible tmux-resurrect ];
   # };
 
-  home.sessionPath = [
-    "$HOME/.local/bin"
-  ];
+  home.sessionPath = [ "$HOME/.local/bin" ];
 }
