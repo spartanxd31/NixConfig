@@ -36,6 +36,9 @@
 
     # Version control
     git
+
+    #remote desktop
+    omnissa-horizon-client
   ];
 
   programs.git = {
