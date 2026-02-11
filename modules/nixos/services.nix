@@ -21,7 +21,14 @@
     wayland = true;
   };
 
-  services.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome = {
+
+    enable = true;
+    extraGSettingsOverrides = ''
+      [org.gnome.mutter]
+      experimental-features=['scale-monitor-framebuffer']
+    '';
+  };
   # services.xserver.displayManager.gdm = {
   #   enable = true;
   #   debug = false;

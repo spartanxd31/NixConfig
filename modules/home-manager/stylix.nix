@@ -14,11 +14,11 @@
 
     # Control which applications get themed
     autoEnable = true; # Enable most targets by default
-    
+
     icons = {
       enable = true;
       package = pkgs.paper-icon-theme;
-      dark = "Paper-Mono-Dark"; 
+      dark = "Paper-Mono-Dark";
     };
 
     image = ./Mandalorian.jpg; # Optional image for color extraction
@@ -32,7 +32,7 @@
       starship.enable = false; # Custom starship config
 
     };
-       # Opacity settings
+    # Opacity settings
     opacity = {
       applications = 1.0;
       terminal = 0.95;
@@ -40,7 +40,7 @@
       popups = 1.0;
     };
 
-       # Font configuration
+    # Font configuration
     fonts = {
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;
@@ -61,5 +61,10 @@
         popups = 10;
       };
     };
+
   };
+  dconf.settings = {
+    "org/gnome/desktop/interface" = { accent-color = "orange"; };
+  };
+
 }
