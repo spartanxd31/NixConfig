@@ -16,6 +16,7 @@
         "docker"
         "libvirtd"
         "openrazer"
+        "dialout"
         "podman"
         "lp"
         "lpadmin"

@@ -14,6 +14,7 @@ in {
     ../modules/home-manager/development.nix
     ../modules/home-manager/applications.nix
     ../modules/home-manager/stylix.nix
+    ../modules/home-manager/hyprland.nix
 
     inputs.spicetify-nix.homeManagerModules.default
   ];
