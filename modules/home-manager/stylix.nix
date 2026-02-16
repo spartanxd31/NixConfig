@@ -17,8 +17,8 @@
 
     icons = {
       enable = true;
-      package = pkgs.paper-icon-theme;
-      dark = "Paper-Mono-Dark";
+      package = pkgs.papirus-icon-theme;
+      dark = "Papirus-Dark";
     };
 
     image = ./Mandalorian.jpg; # Optional image for color extraction

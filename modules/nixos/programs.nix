@@ -41,6 +41,8 @@
     gruvbox-gtk-theme
     gruvbox-dark-icons-gtk
     gruvbox-material-gtk-theme
+    adwaita-icon-theme
+    gnome-themes-extra
     playerctl
     git
     nixfmt-classic
