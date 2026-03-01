@@ -67,5 +67,8 @@
   #for the framework 13
   services.fwupd.enable = true;
 
+  services.fprintd.enable = true;
+
+  security.pam.services.sudo.fprintAuth = true;
 }
 

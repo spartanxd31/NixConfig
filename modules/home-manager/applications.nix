@@ -11,6 +11,8 @@ in {
     freecad
     via
 
+    zoom-us
+
     # Terminal emulator
     kitty
     btop
