@@ -5,6 +5,7 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     hardware.url = "github:NixOS/nixos-hardware";
 
     # Home manager
@@ -37,16 +38,22 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, hardware, stylix, dotfiles, nixvim
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, hardware, stylix, dotfiles, nixvim
     , ... }@inputs:
-    let inherit (self) outputs;
+    let 
+      inherit (self) outputs;
+      system = "x86_64-linux";
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in {
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
         # FIXME replace with your hostname
         nixos = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = { inherit inputs outputs pkgs-unstable; };
           # > Our main nixos configuration file <
           modules = [
             stylix.nixosModules.stylix
@@ -64,7 +71,7 @@
         "dom@nixos" = home-manager.lib.homeManagerConfiguration {
           pkgs =
             nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs; };
+          extraSpecialArgs = { inherit inputs outputs pkgs-unstable; };
           # > Our main home-manager configuration file <
           modules = [
             nixvim.homeModules.nixvim

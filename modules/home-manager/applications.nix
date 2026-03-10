@@ -10,10 +10,12 @@ in {
     obs-studio
     freecad
     via
+    zotero
 
     # Terminal emulator
     kitty
     btop
+
     # Wayland/Hyprland utilities
     wofi
     rofi
@@ -38,6 +40,9 @@ in {
 
     # Music
     spicetify-cli
+    #remote desktop
+    omnissa-horizon-client
+
   ];
 
   home.file.".config/kitty".source = "${dotfiles}/kitty/.config/kitty/";

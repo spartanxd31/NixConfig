@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }: {
+{ inputs, config, pkgs, pkgs-unstable, ... }: {
   home.packages = with pkgs; [
     # Development tools
     bash
@@ -13,6 +13,7 @@
     ruff
     lldb
     vscode-extensions.vadimcn.vscode-lldb
+    pkgs-unstable.opencode
     git
 
     # Build tools
@@ -20,6 +21,7 @@
     unzip
 
     # CLI utilities
+    tmux
     tree
     bat
     fzf
@@ -37,8 +39,6 @@
     # Version control
     git
 
-    #remote desktop
-    omnissa-horizon-client
   ];
 
   programs.git = {
