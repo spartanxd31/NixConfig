@@ -12,6 +12,8 @@ in {
     via
     zotero
 
+    zoom-us
+
     # Terminal emulator
     kitty
     btop

@@ -58,6 +58,7 @@
           basedpyright.enable = true;
           ruff.enable = true;
           nixd.enable = true;
+          verible.enable = true;
           clangd = {
             enable = true;
             cmd = [
