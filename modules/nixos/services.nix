@@ -98,6 +98,7 @@
       PasswordAuthentication = false;
     };
   };
+  services.tailscale.enable = true;
 
   services.udev.extraRules = ''
     # 1. Ignore the device in ModemManager (prevents probing crashes)

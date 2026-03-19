@@ -5,11 +5,6 @@
     package = pkgs.docker_25;
   };
 
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
-  };
-
   virtualisation.podman = {
     enable = true;
     dockerCompat = false;

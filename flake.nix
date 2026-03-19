@@ -38,9 +38,9 @@
 
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, hardware, stylix, dotfiles, nixvim
-    , ... }@inputs:
-    let 
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, hardware, stylix
+    , dotfiles, nixvim, ... }@inputs:
+    let
       inherit (self) outputs;
       system = "x86_64-linux";
       pkgs-unstable = import nixpkgs-unstable {
