@@ -35,11 +35,17 @@
       url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.0.0";
+
+      # Optional but recommended to limit the size of your system closure.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, hardware, stylix
-    , dotfiles, nixvim, ... }@inputs:
+    , dotfiles, nixvim, lanzaboote, ... }@inputs:
     let
       inherit (self) outputs;
       system = "x86_64-linux";
@@ -57,6 +63,7 @@
           # > Our main nixos configuration file <
           modules = [
             stylix.nixosModules.stylix
+            lanzaboote.nixosModules.lanzaboote
             ./nixos/configuration.nix
             { nix.settings = { download-buffer-size = 524288000; }; }
           ];
