@@ -17,7 +17,7 @@
 
     };
 
-    open = false;
+    open = true;
 
     nvidiaSettings = true;
 
