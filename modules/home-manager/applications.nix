@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, pkgs-unstable, ... }:
 let dotfiles = inputs.dotfiles;
 in {
   home.packages = with pkgs; [
