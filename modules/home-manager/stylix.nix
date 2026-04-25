@@ -22,8 +22,7 @@
     };
 
     #    image = ./Mandalorian.jpg; # Optional image for color extraction
-    #    image = ./framework.jpg;
-    image = ./Mandalorian.jpg;
+    image = ./framework.jpg;
 
     # Dark mode configuration
     polarity = "dark"; # Set to "dark" for dark mode, "light" for light mode

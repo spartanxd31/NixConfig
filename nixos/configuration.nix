@@ -16,7 +16,7 @@
     ../modules/nixos/programs.nix
     ../modules/nixos/hardware.nix
     ../modules/nixos/stylix.nix
-    # ../modules/nixos/nvidia.nix  # Uncomment if needed
+    ../modules/nixos/hyprland.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     # ./desktop-hardware-configuration.nix

@@ -19,19 +19,19 @@ in {
     btop
 
     # Wayland/Hyprland utilities
-    wofi
-    rofi
-    waybar
-    wlogout
-    swaynotificationcenter
-    hyprshot
-    hyprpaper
-    hyprpicker
-    hyprlock
-    hypridle
-    hyprcursor
-    cliphist
-    wl-clipboard
+    # wofi
+    # rofi
+    # waybar
+    # wlogout
+    # swaynotificationcenter
+    # hyprshot
+    # hyprpaper
+    # hyprpicker
+    # hyprlock
+    # hypridle
+    # hyprcursor
+    # cliphist
+    # wl-clipboard
 
     # X11 utilities
     xorg.xhost
