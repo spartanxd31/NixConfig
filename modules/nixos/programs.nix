@@ -35,6 +35,8 @@
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    qt6.qtwayland
+    libdecor
     home-manager
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
@@ -79,7 +81,12 @@
     xdg-desktop-portal-gtk
   ];
 
-  environment.sessionVariables = { ENABLE_VK_LAYER_VALVE_steam_overlay = "1"; };
+  environment.sessionVariables = {
+    ENABLE_VK_LAYER_VALVE_steam_overlay = "1";
+
+    QT_QPA_PLATFORM = "xcb";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "0";
+  };
 
   programs.virt-manager.enable = true;
 
