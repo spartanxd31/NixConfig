@@ -14,7 +14,7 @@
     ../modules/nixos/users.nix
     ../modules/nixos/virtualization.nix
     ../modules/nixos/programs.nix
-    ../modules/nixos/hardware.nix
+    #    ../modules/nixos/hardware.nix
     ../modules/nixos/stylix.nix
     ../modules/nixos/hyprland.nix
 

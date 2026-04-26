@@ -57,18 +57,9 @@
     python3
     rustc
     htop
-    hyprpaper
-    hyprpicker
-    hyprlock
-    hyprland-qt-support
     nwg-look
     qt6Packages.qt6ct
-    hyprcursor
-    hyprland-qtutils
-    hyprland
     icu
-    hyprutils
-    hypridle
     ntfs3g
     steam
     cliphist
@@ -83,6 +74,9 @@
     vulkan-loader
     vulkan-validation-layers
     openconnect
+    xwayland
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
   ];
 
   environment.sessionVariables = { ENABLE_VK_LAYER_VALVE_steam_overlay = "1"; };
