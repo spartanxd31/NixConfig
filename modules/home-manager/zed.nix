@@ -1,9 +1,10 @@
-{ inputs, config, pkgs, ... }: {
+{ inputs, config, pkgs, pkgs-unstable, ... }: {
 
   home.packages = with pkgs; [ nix-ld ];
   programs.zed-editor = {
     enable = true;
     extensions = [ "rust" "nix" "neocmake" ];
+    package = pkgs-unstable.zed-editor;
     userSettings = {
 
       vim_mode = true;

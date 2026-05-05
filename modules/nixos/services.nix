@@ -96,9 +96,13 @@
       # Opinionated: use keys only.
       # Remove if you want to SSH using passwords
       PasswordAuthentication = false;
+      KbdInteractiveAuthentication = true;
     };
   };
   services.tailscale.enable = true;
+
+  services.usbmuxd.enable = true;
+  environment.systemPackages = with pkgs; [ libimobiledevice ];
 
   services.udev.extraRules = ''
     # 1. Ignore the device in ModemManager (prevents probing crashes)
