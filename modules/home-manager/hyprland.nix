@@ -16,6 +16,7 @@
      # wlogout
      swaynotificationcenter
      wl-clipboard
+      inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
 
    ];
 
@@ -57,13 +58,14 @@
 
       # Autostart
       exec-once = [
+        "noctalia-shell"
         "hyprctl dispatch workspace 1 && $terminal"
-        "nm-applet &"
-        "hyprpaper"
-        "swaync"
+        #"nm-applet &"
+      #  "hyprpaper"
+      #  "swaync"
         "/usr/lib/polkit-kde-authentication-agent-1"
         "hyprctl dispatch workspace 1 && $browser"
-        "hypridle"
+       # "hypridle"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "wl-paste --type text --watch cliphist store"
       ];

@@ -41,6 +41,10 @@
       # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia = {
+      url ="github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
 
@@ -57,6 +61,9 @@
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
+        #cache for noctailia
+        extra-substituters = [ "https://noctalia.cachix.org" ];
+        extra-trusted-public-keys = [ "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" ];
         # FIXME replace with your hostname
         nixos = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs pkgs-unstable; };
@@ -65,6 +72,7 @@
             stylix.nixosModules.stylix
             lanzaboote.nixosModules.lanzaboote
             ./nixos/configuration.nix
+            ./noctalia.nix
             { nix.settings = { download-buffer-size = 524288000; }; }
           ];
 
@@ -84,7 +92,6 @@
             nixvim.homeModules.nixvim
             stylix.homeModules.stylix
             ./home-manager/home.nix
-
           ];
         };
       };
