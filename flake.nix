@@ -42,7 +42,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     noctalia = {
-      url ="github:noctalia-dev/noctalia-shell";
+      url ="github:noctalia-dev/noctalia-shell/v5";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -92,6 +92,7 @@
             nixvim.homeModules.nixvim
             stylix.homeModules.stylix
             ./home-manager/home.nix
+            inputs.noctalia.homeModules.default
           ];
         };
       };

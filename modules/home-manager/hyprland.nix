@@ -1,24 +1,30 @@
-{ inputs, config, pkgs, pkgs-unstable, ... }: {
+{
+  inputs,
+  config,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
+{
 
   home.packages = with pkgs-unstable; [
 
-     # hyprland
-     hyprland-qtutils
-     hyprland-workspaces
-     hyprland-autoname-workspaces
-     hyprland-protocols
-     hyprland-monitor-attached
-     hyprshot
-     hyprcursor
+    # hyprland
+    hyprland-qtutils
+    hyprland-workspaces
+    hyprland-autoname-workspaces
+    hyprland-protocols
+    hyprland-monitor-attached
+    hyprshot
+    hyprcursor
 
-     # rofi
-     # waybar
-     # wlogout
-     swaynotificationcenter
-     wl-clipboard
-      inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    # rofi
+    # waybar
+    # wlogout
+    wl-clipboard
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
 
-   ];
+  ];
 
   wayland.windowManager.hyprland = {
 
@@ -35,11 +41,16 @@
       "$vim_window" = "ctrl, W";
       "$terminal" = "kitty";
       "$fileManager" = "nautilus";
-      "$menu" = "rofi -show drun";
+      "$menu" = "noctalia msg panel-toggle launcher";
       "$browser" = "zen";
+      "$control" = "noctalia msg panel-toggle control-center";
 
       # Monitor configuration
-      monitor = [ "eDP-1,highres,auto,1.5" "DP-1,preferred,auto-up,auto" ];
+      monitor = [
+        # "eDP-1,highres,auto,1.5"
+        "eDP-1,highres,auto,1"
+        "DP-1,preferred,auto-up,auto"
+      ];
 
       # Environment variables
       env = [
@@ -58,14 +69,14 @@
 
       # Autostart
       exec-once = [
-        "noctalia-shell"
+        "noctalia"
         "hyprctl dispatch workspace 1 && $terminal"
         #"nm-applet &"
-      #  "hyprpaper"
-      #  "swaync"
+        #  "hyprpaper"
+        #  "swaync"
         "/usr/lib/polkit-kde-authentication-agent-1"
         "hyprctl dispatch workspace 1 && $browser"
-       # "hypridle"
+        # "hypridle"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "wl-paste --type text --watch cliphist store"
       ];
@@ -117,7 +128,9 @@
       };
 
       # Master layout
-      master = { new_on_top = true; };
+      master = {
+        new_on_top = true;
+      };
 
       # Misc
       misc = {
@@ -131,7 +144,9 @@
         follow_mouse = 1;
         sensitivity = 0;
 
-        touchpad = { natural_scroll = true; };
+        touchpad = {
+          natural_scroll = true;
+        };
       };
 
       # Device config
@@ -147,6 +162,7 @@
         "$mainMod, E, exec, $fileManager"
         "$mainMod, R, exec, $menu"
         "$mainMod, D, exec, $browser"
+        "$mainMod, F12, exec, $control"
 
         # Window management
         "$mainMod, C, killactive"
@@ -162,7 +178,7 @@
         "$mainMod, j, movefocus, d"
 
         # Waybar toggle
-        "SUPER, b, exec, pkill waybar || waybar"
+        "SUPER, b, exec,  noctalia msg bar-toggle"
 
         # Special workspace (scratchpad)
         "$mainMod, S, togglespecialworkspace, magic"
@@ -175,22 +191,26 @@
         "SUPER, x, exec, cliphist list | rofi -show drun | cliphist decode | wl-copy"
 
         # Lockscreen
-        "$mainMod, F12, exec, hyprlock"
+        # "$mainMod, F12, exec, hyprlock"
 
         # Resize submap
         "ALT, R, submap, resize"
-      ] ++ (
+      ]
+      ++ (
         # Workspaces 1-9 and 0
-        builtins.concatLists (builtins.genList (i:
-          let ws = if i == 9 then 10 else i + 1;
-          in [
-            "$mainMod, ${toString (if i == 9 then 0 else i + 1)}, workspace, ${
-              toString ws
-            }"
-            "$mainMod SHIFT, ${
-              toString (if i == 9 then 0 else i + 1)
-            }, movetoworkspace, ${toString ws}"
-          ]) 10));
+        builtins.concatLists (
+          builtins.genList (
+            i:
+            let
+              ws = if i == 9 then 10 else i + 1;
+            in
+            [
+              "$mainMod, ${toString (if i == 9 then 0 else i + 1)}, workspace, ${toString ws}"
+              "$mainMod SHIFT, ${toString (if i == 9 then 0 else i + 1)}, movetoworkspace, ${toString ws}"
+            ]
+          ) 10
+        )
+      );
 
       # Repeatable binds (with 'e' flag)
       binde = [
@@ -208,10 +228,8 @@
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPrev, exec, playerctl previous"
         # Laptop lid switch
-        ''
-          , switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1, highres 0x0, 1.5"''
-        ''
-          , switch:on:Lid Switch, exec, hyprctl keyword monitor "eDP-1, disable"''
+        # '', switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1, highres 0x0, 1.5"''
+        # '', switch:on:Lid Switch, exec, hyprctl keyword monitor "eDP-1, disable"''
       ];
 
       # Mouse bindings
@@ -235,7 +253,7 @@
 
       # Resize submap
       submap = "resize";
-      gesture = ["3, horizontal, workspace"];
+      gesture = [ "3, horizontal, workspace" ];
     };
 
     # Resize submap keybindings (separate section)
@@ -249,164 +267,4 @@
       submap = reset
     '';
   };
-
-  programs.waybar = {
-    enable = true;
-    settings = {
-      mainBar = {
-        layer = "top";
-        position = "top";
-        height = 30;
-        modules-left =
-          [ "custom/notification" "hyprland/workspaces" "hyprland/window" ];
-        modules-center = [ "clock" ];
-        modules-right =
-          [ "network" "cpu" "memory" "battery" "tray" "custom/logout" ];
-
-        "custom/notification" = {
-          tooltip-format = false;
-          format = "";
-          on-click = "swaync-client -t -sw";
-          escape = true;
-
-        };
-        "hyprland/workspaces" = { format = "{name}"; };
-        "clock" = {
-          format = "{:%H:%M}  ";
-          tooltip-format = ''
-            <big>{:%Y %B}</big>
-            <tt><small>{calendar}</small></tt>'';
-        };
-        "custom/logout" = {
-          format = "⏻";
-          on-click = "wlogout";
-        };
-      };
-    };
-
-    # This replaces the 'style.css' file
-    style = ''
-                        * {
-                          border: none;
-                          font-family: "JetBrainsMono Nerd Font";
-                        }
-                        window#waybar {
-                          background: rgba(43, 48, 59, 0.5);
-                          color: #ffffff;
-                        }
-                        .modules-left {
-                      padding:7px;
-                      margin:10 0 5 10;
-                      border-radius:10px;
-                      background: alpha(@background,.6);
-                      box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
-                  }
-                  .modules-center {
-                      padding:7px;
-                      margin:10 0 5 0;
-                      border-radius:10px;
-                      background: alpha(@background,.6);
-                      box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
-                  }
-                  .modules-right {
-                      padding:7px;
-                      margin: 10 10 5 0;
-                      border-radius:10px;
-                      background: alpha(@background,.6);
-                      box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
-                  }
-                        #workspaces button {
-                          padding: 0 5px;
-                          color: #ffffff;
-                        }
-                        #workspaces button.active {
-                          background-color: #64727D;
-                        }
-                #custom-notification {
-                padding: 0px 5px;
-                transition: all .3s ease;
-            }
-            #bluetooth{
-          padding: 0px 5px;
-          transition: all .3s ease;
-
-      }
-      #network{
-          padding: 0px 5px;
-          transition: all .3s ease;
-
-      }
-      #custom-logout{
-          padding: 0px 5px;
-          transition: all .3s ease;
-
-      }
-
-    '';
-  };
-
-  programs.rofi = {
-    enable = true;
-    extraConfig = {
-      modi = "drun,run,window";
-      icon-theme = "Papirus";
-      show-icons = true;
-      terminal = "kitty";
-      drun-display-format = "{icon} {name}";
-      location = 0;
-      disable-history = false;
-      hide-scrollbar = true;
-      display-drun = "   Apps ";
-      display-run = "   Run ";
-      sidebar-mode = true;
-    };
-
-  };
-  programs.wlogout = {
-    enable = true;
-    package = pkgs-unstable.wlogout;
-    layout = [
-      {
-        label = "lock";
-        action = "hyprlock"; # Or whatever locker you use
-        text = "Lock";
-        keybind = "l";
-      }
-      {
-        label = "hibernate";
-        action = "systemctl hibernate";
-        text = "Hibernate";
-        keybind = "h";
-      }
-      {
-        label = "logout";
-        action = "hyprctl dispatch exit 0";
-        text = "Exit";
-        keybind = "e";
-      }
-      {
-        label = "shutdown";
-        action = "systemctl poweroff";
-        text = "Shutdown";
-        keybind = "s";
-      }
-      {
-        label = "reboot";
-        action = "systemctl reboot";
-        text = "Reboot";
-        keybind = "r";
-      }
-    ];
-  };
-
-
-  programs.hyprlock ={
-    package = pkgs-unstable.hyprlock;
-  };
-
-  services.hypridle = {
-  enable = true;
-
-  };
-
 }
