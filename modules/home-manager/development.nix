@@ -39,6 +39,9 @@
     # Version control
     git
 
+    nixd
+    nil
+
   ];
 
   programs.git = {

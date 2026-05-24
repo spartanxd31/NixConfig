@@ -17,11 +17,11 @@
     ../modules/nixos/virtualization.nix
     ../modules/nixos/programs.nix
     ../modules/nixos/stylix.nix
-    ../modules/nixos/hyprland.nix
+    # ../modules/nixos/hyprland.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
-    ./desktop-hardware-configuration.nix
-    #./laptop-hardware-configuration.nix
+    #    ./desktop-hardware-configuration.nix
+    ./laptop-hardware-configuration.nix
   ];
 
   nixpkgs = {
