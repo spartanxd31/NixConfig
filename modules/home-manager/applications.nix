@@ -17,6 +17,7 @@ in {
     # Terminal emulator
     kitty
     btop
+    prismlauncher
 
     # Wayland/Hyprland utilities
     # wofi

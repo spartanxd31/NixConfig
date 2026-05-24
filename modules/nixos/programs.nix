@@ -1,5 +1,14 @@
-{ inputs, lib, config, pkgs, ... }: {
-  nixpkgs.config.allowUnfreePredicate = pkg:
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
+{
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       "steam"
       "steam-original"
@@ -12,8 +21,10 @@
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
 
-  programs.steam.enable = true;
-
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
   programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
@@ -43,8 +54,6 @@
     gruvbox-gtk-theme
     gruvbox-dark-icons-gtk
     gruvbox-material-gtk-theme
-    adwaita-icon-theme
-    gnome-themes-extra
     playerctl
     git
     nixfmt-classic
@@ -65,7 +74,6 @@
     ntfs3g
     steam
     cliphist
-    gnomeExtensions.caffeine
     tmux
     wl-clipboard
     cargo
@@ -79,17 +87,31 @@
     xwayland
     xdg-desktop-portal
     xdg-desktop-portal-gtk
+    gamescope-wsi
+    wineWowPackages.stable
+    winetricks
+    mangohud
+    sunshine
   ];
 
   environment.sessionVariables = {
     ENABLE_VK_LAYER_VALVE_steam_overlay = "1";
 
-    QT_QPA_PLATFORM = "xcb";
+    QT_QPA_PLATFORM = "wayland;xcb";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "0";
   };
 
   programs.virt-manager.enable = true;
 
   programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [ stdenv.cc.cc zlib ];
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+  ];
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+    package = pkgs-unstable.gamescope;
+  };
+
 }

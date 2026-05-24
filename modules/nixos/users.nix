@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   users.users = {
     dom = {
       # You can set an initial password for your user.
@@ -20,6 +21,9 @@
         "podman"
         "lp"
         "lpadmin"
+        "video"
+        "render"
+        "networkmanager"
       ];
     };
   };

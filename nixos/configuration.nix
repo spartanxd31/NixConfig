@@ -11,16 +11,17 @@
     ../modules/nixos/boot.nix
     ../modules/nixos/networking.nix
     ../modules/nixos/services.nix
+    ../modules/nixos/gnome.nix
+    # ../modules/nixos/kde.nix # Uncomment this and comment gnome.nix to use KDE
     ../modules/nixos/users.nix
     ../modules/nixos/virtualization.nix
     ../modules/nixos/programs.nix
-    #    ../modules/nixos/hardware.nix
     ../modules/nixos/stylix.nix
     ../modules/nixos/hyprland.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
-    # ./desktop-hardware-configuration.nix
-    ./laptop-hardware-configuration.nix
+    ./desktop-hardware-configuration.nix
+    #./laptop-hardware-configuration.nix
   ];
 
   nixpkgs = {
@@ -65,7 +66,7 @@
     };
 
   };
-
+  time.hardwareClockInLocalTime = true;
   hardware.graphics.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

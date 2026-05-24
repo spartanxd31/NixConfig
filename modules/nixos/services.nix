@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   powerManagement.enable = true;
 
   systemd.services.ModemManager.enable = false;
@@ -15,20 +16,7 @@
   # };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.displayManager.gdm = {
-    enable = true;
-    wayland = true;
-  };
-
-  services.desktopManager.gnome = {
-
-    enable = true;
-    extraGSettingsOverrides = ''
-      [org.gnome.mutter]
-      experimental-features=['scale-monitor-framebuffer']
-    '';
-  };
+  # (Moved to gnome.nix)
   # services.xserver.displayManager.gdm = {
   #   enable = true;
   #   debug = false;
@@ -36,10 +24,6 @@
   #   wayland = true;
   #   banner = "Welcome to my NixOS machine!";
   #   autoSuspend = false;
-  # };
-  # services.displayManager.sddm = {
-  #   enable = true;
-  #   wayland = { enable = true; };
   # };
 
   services.flatpak.enable = true;
@@ -68,7 +52,11 @@
   services.printing = {
     enable = true;
     browsing = true;
-    drivers = with pkgs; [ hplipWithPlugin cups-filters cups-browsed ];
+    drivers = with pkgs; [
+      hplipWithPlugin
+      cups-filters
+      cups-browsed
+    ];
   };
 
   # Enable sound.

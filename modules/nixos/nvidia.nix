@@ -1,4 +1,10 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 {
 
@@ -12,18 +18,20 @@
 
     powerManagement = {
 
-      enable = true;
+      enable = false;
       finegrained = false;
 
     };
 
-    open = true;
+    open = false;
 
     nvidiaSettings = true;
 
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # Use the beta (or latest) package for explicit sync and HDR fixes on Wayland
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
   hardware.nvidia-container-toolkit.enable = true;
 
+  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
 }
