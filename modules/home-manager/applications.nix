@@ -48,6 +48,10 @@ in {
 
   ];
 
+  programs.obsidian = {
+    enable = true;
+    package = pkgs-unstable.obsidian;
+  };
   home.file.".config/kitty".source = "${dotfiles}/kitty/.config/kitty/";
 
   programs.kitty = { enable = true; };
