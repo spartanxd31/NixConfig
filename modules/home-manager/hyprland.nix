@@ -1,8 +1,28 @@
-{ inputs, config, pkgs, ... }: {
+{ inputs, config, pkgs, pkgs-unstable, ... }: {
+
+  home.packages = with pkgs-unstable; [
+
+     # hyprland
+     hyprland-qtutils
+     hyprland-workspaces
+     hyprland-autoname-workspaces
+     hyprland-protocols
+     hyprland-monitor-attached
+     hyprshot
+     hyprcursor
+
+     # rofi
+     # waybar
+     # wlogout
+     swaynotificationcenter
+     wl-clipboard
+
+   ];
 
   wayland.windowManager.hyprland = {
 
     enable = true;
+    package = pkgs-unstable.hyprland;
 
     xwayland = {
       enable = true;
@@ -90,7 +110,7 @@
 
       # Dwindle layout
       dwindle = {
-        pseudotile = true;
+        # pseudotile = true;
         preserve_split = true;
       };
 
@@ -209,10 +229,11 @@
       ];
 
       # Window rules
-      windowrulev2 = [ "suppressevent maximize, class:.*" ];
+      window_rule = [ "suppressevent maximize, class:.*" ];
 
       # Resize submap
       submap = "resize";
+      gesture = ["3, horizontal, workspace"];
     };
 
     # Resize submap keybindings (separate section)
@@ -341,7 +362,7 @@
   };
   programs.wlogout = {
     enable = true;
-
+    package = pkgs-unstable.wlogout;
     layout = [
       {
         label = "lock";
@@ -374,6 +395,16 @@
         keybind = "r";
       }
     ];
+  };
+
+
+  programs.hyprlock ={
+    package = pkgs-unstable.hyprlock;
+  };
+
+  services.hypridle = {
+  enable = true;
+
   };
 
 }

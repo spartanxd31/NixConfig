@@ -45,7 +45,7 @@
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, hardware, stylix
-    , dotfiles, nixvim, lanzaboote, ... }@inputs:
+    , dotfiles, nixvim, lanzaboote,  ... }@inputs:
     let
       inherit (self) outputs;
       system = "x86_64-linux";

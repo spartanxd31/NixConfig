@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 {
   powerManagement.enable = true;
 
@@ -72,8 +72,13 @@
 
   services.blueman.enable = true;
 
-  programs.hyprland.enable = true;
-  programs.hyprland.withUWSM = true;
+  programs.hyprland = {
+    enable = true;
+
+    withUWSM = true;
+    package = pkgs-unstable.hyprland;
+  };
+
 
   # Enable the OpenSSH daemon.
   services.openssh = {
