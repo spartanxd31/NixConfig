@@ -1,6 +1,5 @@
 {
-  description =
-    "Flakes config based on minimal config from https://github.com/Misterio77/nix-starter-configs/tree/main";
+  description = "Flakes config based on minimal config from https://github.com/Misterio77/nix-starter-configs/tree/main";
 
   inputs = {
     # Nixpkgs
@@ -42,14 +41,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     noctalia = {
-      url ="github:noctalia-dev/noctalia-shell/v5";
+      url = "github:noctalia-dev/noctalia-shell/v5";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, hardware, stylix
-    , dotfiles, nixvim, lanzaboote,  ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      hardware,
+      stylix,
+      dotfiles,
+      nixvim,
+      lanzaboote,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
       system = "x86_64-linux";
@@ -57,13 +67,16 @@
         inherit system;
         config.allowUnfree = true;
       };
-    in {
+    in
+    {
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
         #cache for noctailia
         extra-substituters = [ "https://noctalia.cachix.org" ];
-        extra-trusted-public-keys = [ "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" ];
+        extra-trusted-public-keys = [
+          "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+        ];
         # FIXME replace with your hostname
         nixos = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs pkgs-unstable; };
@@ -72,8 +85,11 @@
             stylix.nixosModules.stylix
             lanzaboote.nixosModules.lanzaboote
             ./nixos/configuration.nix
-            ./noctalia.nix
-            { nix.settings = { download-buffer-size = 524288000; }; }
+            {
+              nix.settings = {
+                download-buffer-size = 524288000;
+              };
+            }
           ];
 
         };
@@ -84,8 +100,7 @@
       homeConfigurations = {
         # FIXME replace with your username@hostname
         "dom@nixos" = home-manager.lib.homeManagerConfiguration {
-          pkgs =
-            nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs outputs pkgs-unstable; };
           # > Our main home-manager configuration file <
           modules = [
