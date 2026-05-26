@@ -81,6 +81,7 @@
         "/usr/lib/polkit-kde-authentication-agent-1"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "wl-paste --type text --watch cliphist store"
+        "hyprctl dispatch workspace 1"
       ];
 
       # General settings
@@ -248,7 +249,7 @@
 
       # Workspace rules
       workspace = [
-        "1, monitor:$widescreen_monitor, default:true"
+        "1, monitor:$widescreen_monitor"
         "2, monitor:$widescreen_monitor"
         "3, monitor:$widescreen_monitor"
         "4, monitor:$framework_display,layout:scrolling,"
