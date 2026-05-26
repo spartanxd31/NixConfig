@@ -78,9 +78,7 @@
       # Autostart
       exec-once = [
         "noctalia"
-        "hyprctl dispatch workspace 1 && $terminal"
         "/usr/lib/polkit-kde-authentication-agent-1"
-        "hyprctl dispatch workspace 1 && $browser"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "wl-paste --type text --watch cliphist store"
       ];
@@ -181,6 +179,12 @@
         "$mainMod, k, movefocus, u"
         "$mainMod, j, movefocus, d"
 
+        # Window movement (vim keys)
+        "$mainMod SHIFT, h, movewindow, l"
+        "$mainMod SHIFT, l, movewindow, r"
+        "$mainMod SHIFT, k, movewindow, u"
+        "$mainMod SHIFT, j, movewindow, d"
+
         # Waybar toggle
         "SUPER, b, exec,  noctalia msg bar-toggle"
 
@@ -247,9 +251,12 @@
         "1, monitor:$widescreen_monitor, default:true"
         "2, monitor:$widescreen_monitor"
         "3, monitor:$widescreen_monitor"
-        "4, monitor:$framework_display"
+        "4, monitor:$framework_display,layout:scrolling,"
         "5, monitor:$framework_display,layout:scrolling,name:coding"
-        "6, monitor:$framework_display"
+        "6, monitor:$framework_display,layout:scrolling,"
+
+        "m:$widescreen_monitor, layout:dwindle"
+        "m:$framework_display, layout:scrolling"
       ];
 
       # Window rules
