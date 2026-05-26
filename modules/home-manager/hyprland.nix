@@ -58,6 +58,8 @@
         # "eDP-1,highres,auto,1.5"
         "$framework_display,highres,auto,1.5"
         "$widescreen_monitor , preferred,auto-up,auto"
+
+        ",preferred,auto-up,auto"
       ];
 
       # Environment variables
