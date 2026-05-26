@@ -93,7 +93,7 @@
         border_size = 0;
         resize_on_border = true;
         allow_tearing = false;
-        layout = "dwindle";
+        layout = "master";
       };
 
       # Decoration
@@ -251,9 +251,11 @@
 
       # Workspace rules
       workspace = [
-        "1, monitor:$widescreen_monitor"
+        "1, monitor:$widescreen_monitor, default:true"
         "2, monitor:$widescreen_monitor"
         "3, monitor:$widescreen_monitor"
+
+        "1, monitor:$framework_display, default:true"
         "4, monitor:$framework_display,layout:scrolling,"
         "5, monitor:$framework_display,layout:scrolling,name:coding"
         "6, monitor:$framework_display,layout:scrolling,"
