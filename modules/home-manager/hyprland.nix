@@ -1,6 +1,7 @@
 {
   inputs,
   config,
+  lib,
   pkgs,
   pkgs-unstable,
   ...
@@ -26,6 +27,11 @@
 
   ];
 
+  # programs.uwsm = {
+  #   enable = true;
+  #   waylandCompositors.hyprland.binPath = lib.mkForce "${pkgs-unstable}/bin/start-hyprland";
+  # };
+
   wayland.windowManager.hyprland = {
 
     enable = true;
@@ -46,10 +52,12 @@
       "$control" = "noctalia msg panel-toggle control-center";
 
       # Monitor configuration
+      "$widescreen_monitor" = "desc:LG Electronics LG ULTRAWIDE 408NTHM93929";
+      "$framework_display" = "desc:BOE NE135A1M-NY1";
       monitor = [
         # "eDP-1,highres,auto,1.5"
-        "eDP-1,highres,auto,1"
-        "DP-1,preferred,auto-up,auto"
+        "$framework_display,highres,auto,1.5"
+        "$widescreen_monitor , preferred,auto-up,auto"
       ];
 
       # Environment variables
@@ -71,12 +79,8 @@
       exec-once = [
         "noctalia"
         "hyprctl dispatch workspace 1 && $terminal"
-        #"nm-applet &"
-        #  "hyprpaper"
-        #  "swaync"
         "/usr/lib/polkit-kde-authentication-agent-1"
         "hyprctl dispatch workspace 1 && $browser"
-        # "hypridle"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "wl-paste --type text --watch cliphist store"
       ];
@@ -85,7 +89,7 @@
       general = {
         gaps_in = 2;
         gaps_out = 5;
-        border_size = 2;
+        border_size = 0;
         resize_on_border = true;
         allow_tearing = false;
         layout = "dwindle";
@@ -240,12 +244,12 @@
 
       # Workspace rules
       workspace = [
-        "1, monitor:DP-1, default:true"
-        "2, monitor:DP-1"
-        "3, monitor:DP-1"
-        "4, monitor:eDP-1, default:true"
-        "5, monitor:eDP-1"
-        "6, monitor:eDP-1"
+        "1, monitor:$widescreen_monitor, default:true"
+        "2, monitor:$widescreen_monitor"
+        "3, monitor:$widescreen_monitor"
+        "4, monitor:$framework_display"
+        "5, monitor:$framework_display,layout:scrolling,name:coding"
+        "6, monitor:$framework_display"
       ];
 
       # Window rules
