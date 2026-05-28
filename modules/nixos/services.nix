@@ -1,4 +1,10 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
 {
   powerManagement.enable = true;
 
@@ -72,13 +78,16 @@
 
   services.blueman.enable = true;
 
+  programs.uwsm.enable = true;
+  programs.uwsm.waylandCompositors.hyprland.binPath =
+    lib.mkForce "/run/current-system/sw/bin/start-hyprland";
+
   programs.hyprland = {
     enable = true;
 
     withUWSM = true;
     package = pkgs-unstable.hyprland;
   };
-
 
   # Enable the OpenSSH daemon.
   services.openssh = {
