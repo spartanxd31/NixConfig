@@ -167,7 +167,6 @@
         "$mainMod, E, exec, $fileManager"
         "$mainMod, R, exec, $menu"
         "$mainMod, D, exec, $browser"
-        "$mainMod, F12, exec, $control"
 
         # Window management
         "$mainMod, C, killactive"
@@ -238,6 +237,8 @@
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPrev, exec, playerctl previous"
+        # This is the framework button on the framework 13
+        ", XF86AudioMedia, exec, $control"
         # Laptop lid switch
         # '', switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1, highres 0x0, 1.5"''
         # '', switch:on:Lid Switch, exec, hyprctl keyword monitor "eDP-1, disable"''
