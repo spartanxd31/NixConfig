@@ -97,7 +97,7 @@
   environment.sessionVariables = {
     ENABLE_VK_LAYER_VALVE_steam_overlay = "1";
 
-    QT_QPA_PLATFORM = "wayland;xcb";
+    QT_QPA_PLATFORM = "xcb";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "0";
   };
 

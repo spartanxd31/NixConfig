@@ -1,6 +1,13 @@
 {
   description = "Flakes config based on minimal config from https://github.com/Misterio77/nix-starter-configs/tree/main";
 
+  nixConfig = {
+    extra-substituters = [ "https://noctalia.cachix.org" ];
+    extra-trusted-public-keys = [
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    ];
+  };
+
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
@@ -42,7 +49,7 @@
     };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell/v5";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
   };
@@ -73,10 +80,6 @@
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
         #cache for noctailia
-        extra-substituters = [ "https://noctalia.cachix.org" ];
-        extra-trusted-public-keys = [
-          "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
-        ];
         # FIXME replace with your hostname
         nixos = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs pkgs-unstable; };
@@ -88,6 +91,14 @@
             {
               nix.settings = {
                 download-buffer-size = 524288000;
+                trusted-users = [
+                  "root"
+                  "@wheel"
+                ];
+                extra-substituters = [ "https://noctalia.cachix.org" ];
+                extra-trusted-public-keys = [
+                  "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+                ];
               };
             }
           ];
