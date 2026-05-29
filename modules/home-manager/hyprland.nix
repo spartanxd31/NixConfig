@@ -56,7 +56,7 @@
       "$framework_display" = "desc:BOE NE135A1M-NY1";
       monitor = [
         # "eDP-1,highres,auto,1.5"
-        "$framework_display,highres,auto,1.5"
+        "$framework_display,highres,auto,1.5, vrr, 1"
         "$widescreen_monitor , preferred,auto-up,auto"
 
         ",preferred,auto-up,auto"
