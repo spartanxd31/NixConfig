@@ -28,8 +28,8 @@ in
     prismlauncher
 
     # X11 utilities
-    xorg.xhost
-    xorg.xinit
+    xhost
+    xinit
 
     # System utilities
     distrobox
@@ -44,10 +44,14 @@ in
     enable = true;
     package = pkgs-unstable.obsidian;
   };
-  home.file.".config/kitty".source = "${dotfiles}/kitty/.config/kitty/";
 
   programs.kitty = {
     enable = true;
+    settings = {
+      enable_audio_bell = false;
+      # background_opacity = "0.8";
+      hide_window_decorations = "yes";
+    };
   };
 
   programs.firefox.enable = true;

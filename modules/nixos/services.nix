@@ -39,12 +39,12 @@
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Enable systemd-resolved with mDNS/LLMNR so .local hosts are resolved.
-  services.resolved = {
+  services.resolved.settings.Resolve = {
     enable = true;
-    llmnr = "true";
-    extraConfig = ''
-      MulticastDNS=yes
-    '';
+    LLMNR = true;
+    # extraConfig = ''
+    #   MulticastDNS=yes
+    # '';
   };
 
   services.avahi = {
@@ -81,6 +81,7 @@
   programs.uwsm.enable = true;
   programs.uwsm.waylandCompositors.hyprland.binPath =
     lib.mkForce "/run/current-system/sw/bin/start-hyprland";
+  programs.uwsm.waylandCompositors.hyprland.prettyName = "Hyprland";
 
   programs.hyprland = {
     enable = true;
