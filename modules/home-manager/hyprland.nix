@@ -27,15 +27,11 @@
 
   ];
 
-  # programs.uwsm = {
-  #   enable = true;
-  #   waylandCompositors.hyprland.binPath = lib.mkForce "${pkgs-unstable}/bin/start-hyprland";
-  # };
-
   wayland.windowManager.hyprland = {
 
     enable = true;
     package = pkgs-unstable.hyprland;
+    configType = "hyprlang";
 
     xwayland = {
       enable = true;

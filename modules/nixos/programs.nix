@@ -56,7 +56,7 @@
     gruvbox-material-gtk-theme
     playerctl
     git
-    nixfmt-classic
+    nixfmt
     # neovim
     procps
     util-linux
@@ -88,7 +88,7 @@
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     gamescope-wsi
-    wineWowPackages.stable
+    wineWow64Packages.stable
     winetricks
     mangohud
     sunshine

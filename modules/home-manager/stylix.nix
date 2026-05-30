@@ -1,9 +1,9 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   stylix = {
     enable = true;
 
-    base16Scheme =
-      "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
 
     # Cursor configuration - stylix will handle this properly in home-manager
     cursor = {
@@ -36,7 +36,7 @@
     # Opacity settings
     opacity = {
       applications = 1.0;
-      terminal = 0.95;
+      terminal = 0.8;
       desktop = 1.0;
       popups = 1.0;
     };
@@ -65,7 +65,9 @@
 
   };
   dconf.settings = {
-    "org/gnome/desktop/interface" = { accent-color = "orange"; };
+    "org/gnome/desktop/interface" = {
+      accent-color = "orange";
+    };
   };
 
 }
