@@ -23,7 +23,7 @@
 
     #stylix
     stylix = {
-      url = "github:danth/stylix/release-25.11";
+      url = "github:danth/stylix/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -95,6 +95,7 @@
                   "root"
                   "@wheel"
                 ];
+                auto-optimise-store = true;
                 extra-substituters = [ "https://noctalia.cachix.org" ];
                 extra-trusted-public-keys = [
                   "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="

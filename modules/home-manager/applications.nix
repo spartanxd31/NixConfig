@@ -37,6 +37,7 @@ in
     # Music
     spicetify-cli
     #remote desktop
+    omnissa-horizon-client
 
   ];
 
