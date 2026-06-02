@@ -53,7 +53,7 @@
       monitor = [
         # "eDP-1,highres,auto,1.5"
         "$framework_display,highres,auto,1.5, vrr, 1"
-        "$widescreen_monitor , preferred,auto-up,auto"
+        "$widescreen_monitor , preferred,auto-up,auto, bitdepth, 10, cm, hdr, sdrbrightness, 1.25"
 
         ",preferred,auto-up,auto"
       ];
