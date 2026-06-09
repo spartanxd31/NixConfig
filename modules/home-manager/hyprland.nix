@@ -61,7 +61,6 @@
       # Environment variables
       env = [
         "XDG_CURRENT_DESKTOP,Hyprland"
-        "XDG_SESSION_TYPE,wayland"
         "XDG_SESSION_DESKTOP,Hyprland"
         "GTK_THEME,Nord"
         "GDK_SCALE,1.5"
