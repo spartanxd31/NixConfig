@@ -65,7 +65,6 @@
         "XDG_SESSION_DESKTOP,Hyprland"
         "GTK_THEME,Nord"
         "GDK_SCALE,1.5"
-        "QT_QPA_PLATFORM,wayland"
         "QT_QPA_PLATFORMTHEME,qt5ct"
         "XCURSOR_PATH,$HOME/.icons:/usr/share/icons"
         "HYPRCURSOR_THEME,Future-Cyan-Hyprcursor_Theme"

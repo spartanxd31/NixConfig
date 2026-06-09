@@ -1,4 +1,11 @@
-{ inputs, config, pkgs, pkgs-unstable, ... }: {
+{
+  inputs,
+  config,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
+{
   home.packages = with pkgs; [
     # Development tools
     bash
@@ -41,6 +48,10 @@
 
     nixd
     nil
+
+    docker-compose
+    lsb-release
+    openssl
   ];
 
   programs.git = {
