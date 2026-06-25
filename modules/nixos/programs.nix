@@ -14,6 +14,8 @@
       "steam-original"
       "steam-unwrapped"
       "steam-run"
+      "steamcmd"
+      "steam-tui"
     ];
 
   programs.gamemode.enable = true;
@@ -49,7 +51,7 @@
     qt6.qtwayland
     libdecor
     home-manager
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     wget
     gruvbox-gtk-theme
     gruvbox-dark-icons-gtk
@@ -92,6 +94,9 @@
     winetricks
     mangohud
     sunshine
+
+    fsel
+
   ];
 
   environment.sessionVariables = {
