@@ -52,6 +52,8 @@
     docker-compose
     lsb-release
     openssl
+
+    ghostty
   ];
 
   programs.git = {

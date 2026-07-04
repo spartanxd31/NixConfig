@@ -41,7 +41,7 @@
     settings = {
       "$mainMod" = "SUPER";
       "$vim_window" = "ctrl, W";
-      "$terminal" = "kitty";
+      "$terminal" = "ghostty";
       "$fileManager" = "nautilus";
       "$menu" = "noctalia msg panel-toggle launcher";
       "$browser" = "zen";

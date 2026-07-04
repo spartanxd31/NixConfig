@@ -97,6 +97,7 @@
 
     fsel
 
+    kitty
   ];
 
   environment.sessionVariables = {
