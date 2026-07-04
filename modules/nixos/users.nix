@@ -1,4 +1,20 @@
 { config, pkgs, ... }:
+let
+  commonGroups = [
+    "wheel"
+    "plugdev"
+    "docker"
+    "libvirtd"
+    "openrazer"
+    "dialout"
+    "podman"
+    "lp"
+    "lpadmin"
+    "video"
+    "render"
+    "networkmanager"
+  ];
+in
 {
   users.users = {
     dom = {
@@ -11,20 +27,13 @@
       #   # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       # ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [
-        "wheel"
-        "plugdev"
-        "docker"
-        "libvirtd"
-        "openrazer"
-        "dialout"
-        "podman"
-        "lp"
-        "lpadmin"
-        "video"
-        "render"
-        "networkmanager"
-      ];
+      extraGroups = commonGroups;
+    };
+
+    dmarcelli = {
+      initialPassword = "correcthorsebatterystaple";
+      isNormalUser = true;
+      extraGroups = commonGroups;
     };
   };
 }
