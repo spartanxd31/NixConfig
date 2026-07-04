@@ -74,6 +74,21 @@
         inherit system;
         config.allowUnfree = true;
       };
+      mkLinuxHomeConfiguration =
+        username:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = {
+            inherit inputs outputs pkgs-unstable username;
+            homeDirectory = "/home/${username}";
+          };
+          modules = [
+            nixvim.homeModules.nixvim
+            stylix.homeModules.stylix
+            ./home-manager/home.nix
+            inputs.noctalia.homeModules.default
+          ];
+        };
     in
     {
       # NixOS configuration entrypoint
@@ -110,18 +125,8 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
-        # FIXME replace with your username@hostname
-        "dom@nixos" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs pkgs-unstable; };
-          # > Our main home-manager configuration file <
-          modules = [
-            nixvim.homeModules.nixvim
-            stylix.homeModules.stylix
-            ./home-manager/home.nix
-            inputs.noctalia.homeModules.default
-          ];
-        };
+        "dom@nixos" = mkLinuxHomeConfiguration "dom";
+        "dmarcelli@nixos" = mkLinuxHomeConfiguration "dmarcelli";
       };
     };
 }

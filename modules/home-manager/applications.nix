@@ -9,6 +9,10 @@ let
   dotfiles = inputs.dotfiles;
 in
 {
+  imports = [
+    inputs.spicetify-nix.homeManagerModules.default
+  ];
+
   home.packages = with pkgs; [
     # Desktop applications
     discord

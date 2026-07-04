@@ -5,11 +5,10 @@
   lib,
   config,
   pkgs,
+  username,
+  homeDirectory,
   ...
 }:
-let
-  dotfiles = inputs.dotfiles;
-in
 {
   # You can import other home-manager modules here
   imports = [
@@ -20,12 +19,9 @@ in
     ../modules/home-manager/nixvim.nix
     ../modules/home-manager/shell.nix
     ../modules/home-manager/development.nix
-    ../modules/home-manager/applications.nix
     ../modules/home-manager/stylix.nix
     ../modules/home-manager/hyprland.nix
     ../modules/home-manager/zed.nix
-
-    inputs.spicetify-nix.homeManagerModules.default
   ];
 
   nixpkgs = {
@@ -50,10 +46,8 @@ in
     };
   };
 
-  # TODO: Set your username
   home = {
-    username = "dom";
-    homeDirectory = "/home/dom";
+    inherit username homeDirectory;
   };
 
   # Enable home-manager and git
