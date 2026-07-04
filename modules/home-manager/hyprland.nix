@@ -53,7 +53,7 @@
       monitor = [
         # "eDP-1,highres,auto,1.5"
         "$framework_display,highres,auto,1.5, vrr, 1"
-        "$widescreen_monitor , preferred,auto-up,auto, bitdepth, 10, cm, hdr, sdrbrightness, 1.25"
+        "$widescreen_monitor , preferred,auto-up,auto, bitdepth, 10, cm, hdr, sdrbrightness, 2, sdrsaturation, 1.0"
 
         ",preferred,auto-up,auto"
       ];
@@ -88,6 +88,10 @@
         resize_on_border = true;
         allow_tearing = false;
         layout = "master";
+      };
+
+      render = {
+        cm_auto_hdr = 1;
       };
 
       # Decoration
