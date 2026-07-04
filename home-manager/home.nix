@@ -22,6 +22,7 @@
     ../modules/home-manager/stylix.nix
     ../modules/home-manager/hyprland.nix
     ../modules/home-manager/zed.nix
+    ../modules/home-manager/noctalia.nix
   ];
 
   nixpkgs = {

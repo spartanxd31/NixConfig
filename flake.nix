@@ -49,7 +49,7 @@
     };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell/";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
   };
@@ -79,7 +79,12 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
-            inherit inputs outputs pkgs-unstable username;
+            inherit
+              inputs
+              outputs
+              pkgs-unstable
+              username
+              ;
             homeDirectory = "/home/${username}";
           };
           modules = [

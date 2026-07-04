@@ -30,10 +30,10 @@ in
       extraGroups = commonGroups;
     };
 
-    dmarcelli = {
-      initialPassword = "correcthorsebatterystaple";
-      isNormalUser = true;
-      extraGroups = commonGroups;
-    };
+    # dmarcelli = {
+    #   initialPassword = "correcthorsebatterystaple";
+    #   isNormalUser = true;
+    #   extraGroups = commonGroups;
+    # };
   };
 }
