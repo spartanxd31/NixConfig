@@ -18,7 +18,7 @@
     hyprland-monitor-attached
     hyprshot
     hyprcursor
-
+    hyprdynamicmonitors
     # rofi
     # waybar
     # wlogout
