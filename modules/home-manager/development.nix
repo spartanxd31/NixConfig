@@ -54,6 +54,9 @@
     openssl
 
     ghostty
+
+    codex
+    codex-acp
   ];
 
   programs.git = {

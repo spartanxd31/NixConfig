@@ -42,6 +42,7 @@ in
     spicetify-cli
     #remote desktop
     omnissa-horizon-client
+    mission-planner
 
   ];
 

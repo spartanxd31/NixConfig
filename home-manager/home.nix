@@ -16,6 +16,7 @@
     # inputs.nix-colors.homeManagerModule
 
     # Import modularized configuration
+    ../modules/home-manager/applications.nix
     ../modules/home-manager/nixvim.nix
     ../modules/home-manager/shell.nix
     ../modules/home-manager/development.nix
