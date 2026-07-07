@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
-  networking.hostName = "nixos";
+  # networking.hostName = "nixos";
+  networking.hostName = "burner";
 
   networking.networkmanager = {
     enable = true;
@@ -13,7 +14,18 @@
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
-  networking.firewall.allowedUDPPorts = [ 5353 ];
+  networking.firewall.allowedUDPPorts = [
+    5353
+    14540
+    14550
+    14560
+  ];
+  networking.firewall.allowedUDPPortRanges = [
+    {
+      from = 7400;
+      to = 8000;
+    }
+  ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 }

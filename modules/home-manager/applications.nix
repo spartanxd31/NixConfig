@@ -43,6 +43,7 @@ in
     #remote desktop
     omnissa-horizon-client
     mission-planner
+    qgroundcontrol
 
   ];
 
