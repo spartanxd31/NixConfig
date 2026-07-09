@@ -48,6 +48,11 @@
       "$control" = "noctalia msg panel-toggle control-center";
 
       # Monitor configuration
+
+      source = [
+        "~/.config/hypr/monitors.conf"
+      ];
+
       "$widescreen_monitor" = "desc:LG Electronics LG ULTRAWIDE 408NTHM93929";
       "$framework_display" = "desc:BOE NE135A1M-NY1";
       monitor = [
