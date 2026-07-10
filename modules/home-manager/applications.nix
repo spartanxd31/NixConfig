@@ -40,6 +40,9 @@ in
 
     # Music
     spicetify-cli
+
+    vlc
+
     #remote desktop
     omnissa-horizon-client
     mission-planner
