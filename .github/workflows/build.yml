@@ -15,6 +15,8 @@ jobs:
 
       - name: Set up Nix
         uses: cachix/install-nix-action@v15
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Home Manager Flake
         run:  nix run nixpkgs#home-manager -- build --flake .#dom@nixos
