@@ -40,3 +40,4 @@ jobs:
         with:
           name: dom-nixos-dotfiles
           path: extracted-dotfiles/
+          include-hidden-files: true
