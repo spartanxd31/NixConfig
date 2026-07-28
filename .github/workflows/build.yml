@@ -21,3 +21,8 @@ jobs:
       - name: Build Home Manager Flake
         run:  nix run nixpkgs#home-manager -- build --flake .#dom@nixos
 
+      - name: Upload Result
+        uses: actions/upload-artifact@v4
+        with:
+          name: dom-nixos-dotfiles
+          path: extracted-dotfiles/
