@@ -1,0 +1,21 @@
+name: Build Home Manager Flake
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Nix
+        uses: cachix/install-nix-action@v15
+
+      - name: Build Home Manager Flake
+        run:  home-manager switch --flake .#dom@nixos
+

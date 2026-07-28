@@ -9,6 +9,8 @@
   home.packages = with pkgs-unstable; [
 
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    evtest
+    gpu-screen-recorder
   ];
 
   programs.noctalia = {
