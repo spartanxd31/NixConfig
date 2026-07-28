@@ -17,5 +17,5 @@ jobs:
         uses: cachix/install-nix-action@v15
 
       - name: Build Home Manager Flake
-        run:  home-manager switch --flake .#dom@nixos
+        run:  home-manager build --flake .#dom@nixos
 
