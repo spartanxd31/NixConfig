@@ -20,8 +20,17 @@ jobs:
 
       - name: Build Home Manager Flake
         run:  nix run nixpkgs#home-manager -- build --flake .#dom@nixos
+      - name: Extract and Resolve Dotfiles
+        run: |
+          # Create a fresh folder to hold our real files
+          mkdir -p extracted-dotfiles
+          
+          # The -L flag is the magic here. It tells the copy command to follow 
+          # the symlinks and grab the actual file contents from the Nix store.
+          # Home Manager stores your mapped files in result/home-files/
+          cp -rL result/home-files/.config extracted-dotfiles/
 
-      - name: Upload Result
+  - name: Upload Result
         uses: actions/upload-artifact@v4
         with:
           name: dom-nixos-dotfiles
