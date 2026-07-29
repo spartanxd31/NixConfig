@@ -2,6 +2,7 @@
 
   programs.nixvim = {
     enable = true;
+    nixpkgs.source = inputs.nixpkgs;
 
     globals.mapleader = " ";
     globals.maplocalleader = " ";
