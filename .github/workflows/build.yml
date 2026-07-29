@@ -3,11 +3,20 @@ name: Build Home Manager Flake
 on:
   push:
     branches:
-      - main  
+      - main
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  DOTFILES_ARCHIVE: dom-nixos-dotfiles.tar.gz
 
 jobs:
   build:
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -24,20 +33,31 @@ jobs:
       - name: Extract and Resolve Dotfiles
         run: |
           mkdir -p extracted-dotfiles
-          
-          echo "--- Contents of result/home-files/ ---"
-          ls -la result/home-files/ || true
-          
 
-          cp -rL result/home-files/. extracted-dotfiles/
-          
+          cp -rL result/home-files/.config extracted-dotfiles/
 
-          echo "--- Contents of extracted-dotfiles/ ---"
-          ls -la extracted-dotfiles/
+      - name: Package Dotfiles
+        run: tar -C extracted-dotfiles -czf "$DOTFILES_ARCHIVE" .config
 
       - name: Upload Result
         uses: actions/upload-artifact@v4
         with:
           name: dom-nixos-dotfiles
-          path: extracted-dotfiles/
+          path: |
+            extracted-dotfiles/
+            ${{ env.DOTFILES_ARCHIVE }}
           include-hidden-files: true
+
+      - name: Publish Release Asset
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" "$DOTFILES_ARCHIVE" --clobber
+          else
+            gh release create "$RELEASE_TAG" "$DOTFILES_ARCHIVE" \
+              --title "$RELEASE_TAG" \
+              --notes "Generated dotfiles from Home Manager for commit ${GITHUB_SHA}."
+          fi
