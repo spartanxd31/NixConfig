@@ -51,7 +51,10 @@
       url = "github:noctalia-dev/noctalia-shell/";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    noctalia-greeter = {
+      url = "github:noctalia-dev/noctalia-greeter";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -107,6 +110,7 @@
           modules = [
             stylix.nixosModules.stylix
             lanzaboote.nixosModules.lanzaboote
+            inputs.noctalia-greeter.nixosModules.default
             ./nixos/configuration.nix
             {
               nix.settings = {
