@@ -2,9 +2,15 @@
   description = "Flakes config based on minimal config from https://github.com/Misterio77/nix-starter-configs/tree/main";
 
   nixConfig = {
-    extra-substituters = [ "https://noctalia.cachix.org" ];
+    extra-substituters = [
+      "https://noctalia.cachix.org"
+
+      "https://attic.xuyh0120.win/lantian"
+    ];
+
     extra-trusted-public-keys = [
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+      "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
     ];
   };
 
@@ -55,6 +61,11 @@
       url = "github:noctalia-dev/noctalia-greeter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-cachyos-kernel = {
+      url = "github:xddxdd/nix-cachyos-kernel/release";
+    };
+
   };
 
   outputs =
@@ -68,6 +79,8 @@
       dotfiles,
       nixvim,
       lanzaboote,
+      nix-cachyos-kernel,
+
       ...
     }@inputs:
     let
@@ -112,7 +125,9 @@
             lanzaboote.nixosModules.lanzaboote
             inputs.noctalia-greeter.nixosModules.default
             ./nixos/configuration.nix
+
             {
+              nixpkgs.overlays = [ nix-cachyos-kernel.overlays.pinned ];
               nix.settings = {
                 download-buffer-size = 524288000;
                 trusted-users = [
@@ -120,9 +135,13 @@
                   "@wheel"
                 ];
                 auto-optimise-store = true;
-                extra-substituters = [ "https://noctalia.cachix.org" ];
+                extra-substituters = [
+                  "https://noctalia.cachix.org"
+                  "https://attic.xuyh0120.win/lantian"
+                ];
                 extra-trusted-public-keys = [
                   "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+                  "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
                 ];
               };
             }
