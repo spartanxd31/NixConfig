@@ -98,6 +98,8 @@
     fsel
 
     kitty
+
+    networkmanagerapplet
   ];
 
   environment.sessionVariables = {
