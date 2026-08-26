@@ -1,25 +1,27 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
+  # Keep options that exist in both the NixOS and Home Manager Stylix modules
+  # here. Home Manager imports this module and adds its platform-specific
+  # targets in modules/home-manager/stylix.nix.
   stylix = {
     enable = true;
+    autoEnable = true;
 
-    # Set base16 scheme to gruvbox-material-dark-hard
-    base16Scheme =
-      "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
-
-    # Set image for wallpaper and color extraction (optional)
-    #image = ./Mandalorian.jpg;
-
-    # Polarity (dark or light)
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
     polarity = "dark";
 
-    # Cursor configuration - disabled, managed by home-manager
-    # cursor = {
-    #   package = pkgs.bibata-cursors;
-    #   name = "Bibata-Modern-Ice";
-    #   size = 24;
-    # };
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+      size = 24;
+    };
 
-    # Font configuration
+    icons = {
+      enable = true;
+      package = pkgs.papirus-icon-theme;
+      dark = "Papirus-Dark";
+    };
+
     fonts = {
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;
@@ -41,12 +43,14 @@
       };
     };
 
-    # Opacity settings
     opacity = {
       applications = 1.0;
-      terminal = 0.95;
+      terminal = 0.8;
       desktop = 1.0;
       popups = 1.0;
     };
+
+    # This target exists in both the NixOS and Home Manager Stylix modules.
+    targets.spicetify.enable = false;
   };
 }
