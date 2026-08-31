@@ -63,7 +63,7 @@
     enable = true;
     settings = {
       user.name = "Domenic Marcelli";
-      user.email = "dmarcelli@mitre.org";
+      user.email = "spartanxd31@vt.edu";
     };
   };
 
