@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
-  # networking.hostName = "nixos";
-  networking.hostName = "burner";
+   networking.hostName = "nixos";
+#  networking.hostName = "burner";
 
   networking.networkmanager = {
     enable = true;

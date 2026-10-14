@@ -100,12 +100,16 @@
       # Remove if you want to SSH using passwords
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = true;
+      X11Forwarding = true;
     };
   };
   services.tailscale.enable = true;
 
   services.usbmuxd.enable = true;
-  environment.systemPackages = with pkgs; [ libimobiledevice ];
+  environment.systemPackages = with pkgs; [
+    libimobiledevice
+    xorg.xauth
+  ];
 
   services.udev.extraRules = ''
     # 1. Ignore the device in ModemManager (prevents probing crashes)
